@@ -1,13 +1,12 @@
 package com.codecool.websocket.controller;
 
 
-import com.codecool.websocket.models.Greeting;
-import com.codecool.websocket.models.Message;
+import com.codecool.websocket.models.SendResponse;
+import com.codecool.websocket.models.Response;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.util.HtmlUtils;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 @Controller
@@ -15,12 +14,14 @@ public class GameController {
 
         @MessageMapping("/hello")
         @SendTo("/topic/greetings")
-        public Greeting greeting(Message message) throws Exception {
+        public SendResponse greeting(Response message) throws Exception {
             Thread.sleep(1000); // simulated delay
             String data = HtmlUtils.htmlEscape(message.getName());
-            return new Greeting("Hello, " + data + "!");
+            if (Integer.valueOf(data) == 0){
+                return new SendResponse("1");
+            }
+            return new SendResponse(data);
         }
-
 }
 
 

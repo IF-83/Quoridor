@@ -2,15 +2,15 @@ package com.codecool.websocket.models;
 
 
 
-public class Greeting {
+public class SendResponse {
 
 
     private String content;
 
-    public Greeting() {
+    public SendResponse() {
     }
 
-    public Greeting(String content) {
+    public SendResponse(String content) {
         this.content = content;
     }
 

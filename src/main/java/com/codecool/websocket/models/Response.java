@@ -1,15 +1,15 @@
 package com.codecool.websocket.models;
 
 
-public class Message {
+public class Response {
 
 
     private String name;
 
-    public Message() {
+    public Response() {
     }
 
-    public Message(String name) {
+    public Response(String name) {
         this.name = name;
     }
 
