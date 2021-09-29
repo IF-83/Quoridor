@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 @Controller
-public class GreetingController {
+public class GameController {
 
         @MessageMapping("/hello")
         @SendTo("/topic/greetings")
         public Greeting greeting(Message message) throws Exception {
             Thread.sleep(1000); // simulated delay
-            return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
+            String data = HtmlUtils.htmlEscape(message.getName());
+            return new Greeting("Hello, " + data + "!");
         }
 
 }
