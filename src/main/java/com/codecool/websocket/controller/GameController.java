@@ -20,7 +20,7 @@ public class GameController {
         public SendResponse greeting(Response message) throws Exception {
             Thread.sleep(1000); // simulated delay
             //String data = HtmlUtils.htmlEscape(message.getName());
-            return new SendResponse("[{\"type\":\"stepField\"}]");
+            return new SendResponse("[{\"cellId\":\"0\"}]");
         }
 
 }
