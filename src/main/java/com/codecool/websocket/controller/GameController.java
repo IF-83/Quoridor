@@ -19,8 +19,8 @@ public class GameController {
         @SendTo("/topic/greetings")
         public SendResponse greeting(Response message) throws Exception {
             Thread.sleep(1000); // simulated delay
-            //String data = HtmlUtils.htmlEscape(message.getName());
-            return new SendResponse("[{\"cellId\":\"0\"}]");
+            String data = HtmlUtils.htmlEscape(message.getName());
+            return new SendResponse("[{\"cellId\":\""+ data + "\"}]");
         }
 
 }
