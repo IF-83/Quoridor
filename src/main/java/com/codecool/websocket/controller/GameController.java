@@ -8,6 +8,9 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.util.HtmlUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 @Controller
 public class GameController {
@@ -16,12 +19,10 @@ public class GameController {
         @SendTo("/topic/greetings")
         public SendResponse greeting(Response message) throws Exception {
             Thread.sleep(1000); // simulated delay
-            String data = HtmlUtils.htmlEscape(message.getName());
-            if (Integer.valueOf(data) == 0){
-                return new SendResponse("1");
-            }
-            return new SendResponse(data);
+            //String data = HtmlUtils.htmlEscape(message.getName());
+            return new SendResponse("[{\"type\":\"stepField\"}]");
         }
+
 }
 
 
