@@ -15,12 +15,13 @@ import java.util.Map;
 @Controller
 public class GameController {
 
-        @MessageMapping("/hello")
+    @MessageMapping("/hello")
         @SendTo("/topic/greetings")
         public SendResponse greeting(Response message) throws Exception {
             Thread.sleep(1000); // simulated delay
             String data = HtmlUtils.htmlEscape(message.getName());
-            return new SendResponse("[{\"cellId\":\""+ data + "\"}]");
+            System.out.println(data);
+            return new SendResponse("[{\"cellId\":\""+ data + "\",\"player\": \"player2\"}]");
         }
 
 }
