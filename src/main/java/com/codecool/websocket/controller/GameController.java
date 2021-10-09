@@ -22,7 +22,9 @@ public class GameController {
             String data = HtmlUtils.htmlEscape(message.getName());
             System.out.println(data);
             return new SendResponse("[{\"cellId\":\""+ data + "\",\"player\": \"player2\"}]");
-        }
+            // Hiba , Lépés, Fal, amit mindenképp kezelni kell. Response plan:
+            //CellID : int, player: options, isMove: boolean,Wall1id:int,Wall2id:int,Wall3id:int
+    }
 
 }
 
