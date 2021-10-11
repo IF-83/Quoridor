@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Request {
 
-    protected String name;
-    protected String player;
-
+    private String cellId;
+    private String player;
 
 }

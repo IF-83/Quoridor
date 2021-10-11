@@ -2,6 +2,7 @@ package com.codecool.websocket.controller;
 
 
 import com.codecool.websocket.models.Request;
+import com.codecool.websocket.models.Response;
 import com.codecool.websocket.storage.GameData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -26,9 +27,13 @@ public class GameController {
     @MessageMapping("/hello/{gameId}")
         //@SendTo("/topic/greetings/{gameId}")
         public void greeting(@DestinationVariable String gameId, Request request) throws Exception {
-        String data = HtmlUtils.htmlEscape(request.getName());
+        String cellId = HtmlUtils.htmlEscape(request.getCellId());
+        String player = HtmlUtils.htmlEscape(request.getPlayer());
+        Response resp = new Response(cellId,player);
+        System.out.println(player);
             if (Integer.valueOf(gameId) == 1 ) {
-                simpleMessagingTemplate.convertAndSend("/topic/greetings/"+ gameId,"[{\"cellId\":\""+ data + "\",\"player\": \"player2\",\"gameId\":\""+ gameId + "\"}]");
+                simpleMessagingTemplate.convertAndSend("/topic/greetings/"+ gameId,resp);
+                //simpleMessagingTemplate.convertAndSend("/topic/greetings/"+ gameId,"[{\"cellId\":\""+ cellId + "\",\"player\": \"player2\",\"gameId\":\""+ gameId + "\"}]");
                 }
             }
 
