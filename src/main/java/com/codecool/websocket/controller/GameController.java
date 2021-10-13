@@ -29,19 +29,26 @@ public class GameController {
         public void greeting(@DestinationVariable String gameId, Request request) throws Exception {
         String cellId = HtmlUtils.htmlEscape(request.getCellId());
         String player = HtmlUtils.htmlEscape(request.getPlayer());
-        Response resp = new Response(cellId,player);
+
         System.out.println(player);
             if (Integer.valueOf(gameId) == 1 ) {
-                simpleMessagingTemplate.convertAndSend("/topic/greetings/"+ gameId,resp);
+                if (player.equals("player2")){
+                    simpleMessagingTemplate.convertAndSend("/topic/greetings/"+ gameId,new Response(cellId,"notYourTurn"));
+                }
+                simpleMessagingTemplate.convertAndSend("/topic/greetings/"+ gameId,new Response(cellId,player));
                 //simpleMessagingTemplate.convertAndSend("/topic/greetings/"+ gameId,"[{\"cellId\":\""+ cellId + "\",\"player\": \"player2\",\"gameId\":\""+ gameId + "\"}]");
                 }
             }
 
     @GetMapping("/fetchNextGame")
     @CrossOrigin
-    public String fetchGame(){
+    public Response fetchGame(){
         Integer boardId = gameData.createGame();
-        return "{\"gameId\" :\""+ boardId + "\"}";
+        //Response resp = new Response(String.valueOf(boardId));
+        Response resp = Response.builder()
+                .boardId(String.valueOf(boardId))
+                .build();
+        return resp;
     }
 }
 
