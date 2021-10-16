@@ -24,29 +24,35 @@ public class GameController {
     @Autowired
     private SimpMessagingTemplate simpleMessagingTemplate;
 
-    @MessageMapping("/hello/{gameId}")
+    @MessageMapping("/game/{gameId}")
         //@SendTo("/topic/greetings/{gameId}")
         public void greeting(@DestinationVariable String gameId, Request request) throws Exception {
+        System.out.println(request);
         String cellId = HtmlUtils.htmlEscape(request.getCellId());
         String player = HtmlUtils.htmlEscape(request.getPlayer());
-
         System.out.println(player);
             if (Integer.valueOf(gameId) == 1 ) {
                 if (player.equals("player2")){
-                    simpleMessagingTemplate.convertAndSend("/topic/greetings/"+ gameId,new Response(cellId,"notYourTurn"));
-                }
-                simpleMessagingTemplate.convertAndSend("/topic/greetings/"+ gameId,new Response(cellId,player));
-                //simpleMessagingTemplate.convertAndSend("/topic/greetings/"+ gameId,"[{\"cellId\":\""+ cellId + "\",\"player\": \"player2\",\"gameId\":\""+ gameId + "\"}]");
+                    simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",new Response(cellId,player));
+                    simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(cellId,player));
+                } else if(player.equals("player1")) {
+                    simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",new Response(cellId,player));
+                    simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(cellId,player));
+                }else {
+                    throw new IllegalArgumentException("Meghaltál");
                 }
             }
+    }
 
     @GetMapping("/fetchNextGame")
     @CrossOrigin
     public Response fetchGame(){
         Integer boardId = gameData.createGame();
+        String player = "player1";
         //Response resp = new Response(String.valueOf(boardId));
         Response resp = Response.builder()
                 .boardId(String.valueOf(boardId))
+                .player(player)
                 .build();
         return resp;
     }
