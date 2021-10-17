@@ -12,9 +12,9 @@ public class Response {
 
     private String cellId;
     private String player;
-    private String boardId;
-    public Response (String boardId){
-        this.boardId =boardId;
+    private Long gameId;
+    public Response (Long gameId){
+        this.gameId = gameId;
     }
 
     public Response (String cellId, String player){
