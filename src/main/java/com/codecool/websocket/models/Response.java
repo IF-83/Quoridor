@@ -1,8 +1,5 @@
 package com.codecool.websocket.models;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @Builder
@@ -13,6 +10,9 @@ public class Response {
     private String cellId;
     private String player;
     private Long gameId;
+    private boolean invalidMove = false;
+    private String errorMsg;
+
     public Response (Long gameId){
         this.gameId = gameId;
     }

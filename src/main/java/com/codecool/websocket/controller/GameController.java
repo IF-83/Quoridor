@@ -31,27 +31,21 @@ public class GameController {
         System.out.println("Meghívtam az endpointot ");
         Optional<Game> game = gamerep.findById(Long.valueOf(gameId));
         if(game.isPresent()){
-            System.out.println("I hate Java");
-        } else {
-            System.out.println("I do hate React too");
+            System.out.println("Game FOUND");
+            String cellId = HtmlUtils.htmlEscape(request.getCellId());
+            String player = HtmlUtils.htmlEscape(request.getPlayer());
+            System.out.println(player);
+                if (game.get().getNextPlayer().equals(player)) {
+                    simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",new Response(cellId,player));
+                    simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(cellId,player));
+                } else  {
+                    simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/"+ player,Response.builder().invalidMove(true).build());
+                    System.out.println(Response.builder().invalidMove(true).build());
+                }
+            }else {
+            System.out.println("GAME NOT FOUND");
         }
-
     }
-//        String cellId = HtmlUtils.htmlEscape(request.getCellId());
-//        String player = HtmlUtils.htmlEscape(request.getPlayer());
-//        System.out.println(player);
-//                if (game.getNextPlayer().equals(player)) {
-//                    game.setNextPlayer("player1");
-//                    simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",new Response(cellId,player));
-//                    simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(cellId,player));
-//                } else if(game.getNextPlayer().equals(player)) {
-//                    game.setNextPlayer("player2");
-//                    simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",new Response(cellId,player));
-//                    simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(cellId,player));
-//                }else {
-//                    throw new IllegalArgumentException("Meghaltál");
-//                }
-//            }
 
 
     @GetMapping("/fetchNextGame")
