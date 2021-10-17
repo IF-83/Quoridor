@@ -36,6 +36,8 @@ public class GameController {
             String player = HtmlUtils.htmlEscape(request.getPlayer());
             System.out.println(player);
                 if (game.get().getNextPlayer().equals(player)) {
+                    game.get().setNextPlayer(player.equals("player1") ? "player2" : "player1");
+                    gamerep.save(game.get());
                     simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",new Response(cellId,player));
                     simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(cellId,player));
                 } else  {
