@@ -1,10 +1,12 @@
 package com.codecool.websocket.controller;
 
-
+import com.google.gson.reflect.TypeToken;
 import com.codecool.websocket.models.Request;
 import com.codecool.websocket.models.Response;
+import com.codecool.websocket.storage.Cell;
 import com.codecool.websocket.storage.Game;
 import com.codecool.websocket.storage.repository.GameRepository;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -15,6 +17,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.HtmlUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -56,6 +66,16 @@ public class GameController {
         Game game = new Game();
         String player = "player1";
         game.setNextPlayer(player);
+        String file = null;
+        try {
+            file = Files.readString(Paths.get("./src/main/resources/initBoard.json"));
+            System.out.println(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Gson gson = new Gson();
+        List<Cell> cells = gson.fromJson(file,new TypeToken<List<Cell>>() {}.getType());
+        System.out.println(cells);
         Long gameId = gamerep.save(game).getGameId();
         Response resp = Response.builder()
                 .gameId(gameId)

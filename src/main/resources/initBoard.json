@@ -1,0 +1,1881 @@
+[
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":1
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":2
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":3
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":4
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":5
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":6
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":7
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":8
+    },
+    {
+        "type": "stepField",
+        "player": "player1",
+        "direction:":"none",
+        "wallType":"none",
+        "id":9
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":10
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":11
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":12
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":13
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":14
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":15
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":16
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":17
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":18
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":19
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":20
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":21
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":22
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":23
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":24
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":25
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":26
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":27
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":28
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":29
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":30
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":31
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":32
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":33
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":34
+    },{
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":35
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":36
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":37
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":38
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":39
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":40
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":41
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":42
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":43
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":44
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":45
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":46
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":47
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":48
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":49
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":50
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":51
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":52
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":53
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":54
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":55
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":56
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":57
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":58
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":59
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":60
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":61
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":62
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":63
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":64
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":65
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":66
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":67
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":68
+    },{
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":69
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":70
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":71
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":72
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":73
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":74
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":75
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":76
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":77
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":78
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":79
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":80
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":81
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":82
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":83
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":84
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":85
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":86
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":87
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":88
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":89
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":90
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":91
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":92
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":93
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":94
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":95
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":96
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":97
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":98
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":99
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":100
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":101
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":102
+    },{
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":103
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":104
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":105
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":106
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":107
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":108
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":109
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":110
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":111
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":112
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":113
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":114
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":115
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":116
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":117
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":118
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":119
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":120
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":121
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":122
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":123
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":124
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":125
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":126
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":127
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":128
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":129
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":130
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":131
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":132
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":133
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":134
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":135
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":136
+    },{
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":137
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":138
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":139
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":140
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":141
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":142
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":143
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":144
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":145
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":146
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":147
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":148
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":149
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":150
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":151
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":152
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":153
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":154
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":155
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":156
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":157
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":158
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":159
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":160
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":161
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":162
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":163
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":164
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":165
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":166
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":167
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":168
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":169
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":170
+    },{
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":171
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":172
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":173
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":174
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":175
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":176
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":177
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":178
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":179
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":180
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":181
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":182
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":183
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":184
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":185
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":186
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":187
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":188
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":189
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":190
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":191
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":192
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":193
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":194
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":195
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":196
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":197
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":198
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":199
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":200
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":201
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":202
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":203
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":204
+    },{
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":205
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":206
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":207
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":208
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":209
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":210
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":211
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":212
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":213
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":214
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":215
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":216
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":217
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":218
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":219
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":220
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":221
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":222
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":223
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":224
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":225
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":226
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":227
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":228
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":229
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":230
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":231
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":232
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":233
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":234
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":235
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":236
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":237
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":238
+    },{
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":239
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":240
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":241
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":242
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":243
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":244
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":245
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":246
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":247
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":248
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":249
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":250
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":251
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":252
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":253
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":254
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":255
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":256
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":257
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":258
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":259
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":260
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":261
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":262
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":263
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":264
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":265
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":266
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":267
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":268
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":269
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":270
+    },{
+        "type": "corner",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":271
+    },{
+        "type": "wall",
+        "player": "player0",
+        "direction":"horizontal",
+        "wallType":"empty",
+        "id":272
+    },{
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":273
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":274
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":275
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":276
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":277
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":278
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":279
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":280
+    },
+    {
+        "type": "stepField",
+        "player": "player2",
+        "direction:":"none",
+        "wallType":"none",
+        "id":281
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":282
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":283
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":284
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":285
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":286
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction:":"none",
+        "wallType":"none",
+        "id":287
+    },
+    {
+        "type":"wall",
+        "player":"player0",
+        "direction":"vertical",
+        "wallType":"empty",
+        "id":288
+    },
+    {
+        "type": "stepField",
+        "player": "player0",
+        "direction":"none",
+        "wallType":"none",
+        "id":289
+    }
+]

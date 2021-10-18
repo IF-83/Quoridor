@@ -6,19 +6,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
-@AllArgsConstructor
-@Builder
+//@Builder
 @Data
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 public class Game {
-
+//    @OneToMany
+//    private List<Cell> cells;
     private String nextPlayer;
     @Id
     @GeneratedValue
     private Long gameId;
 }
+
