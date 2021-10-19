@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @Builder
@@ -15,13 +13,18 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Entity
 public class Cell {
+
+    @ManyToOne
+    private Game game;
+
     private String type;
     private String player;
     private String direction;
     private String wallType;
     private String id;
+
     @Id
-    @GeneratedValue
+    @GeneratedValue( strategy= GenerationType.AUTO )
     private Long cellId;
 }
 

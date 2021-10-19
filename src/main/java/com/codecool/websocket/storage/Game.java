@@ -1,24 +1,33 @@
 package com.codecool.websocket.storage;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+
+
+//@OneToMany(mappedBy = "school", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+//@EqualsAndHashCode.Exclude
+//private Set<Student> students;
+
+
 
 //@Builder
 @Data
 @Entity
 @NoArgsConstructor
 public class Game {
-//    @OneToMany
-//    private List<Cell> cells;
+
+//    @Singular
+//    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "game", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Cell> cells;
+
     private String nextPlayer;
+
     @Id
-    @GeneratedValue
+    @GeneratedValue( strategy= GenerationType.AUTO )
     private Long gameId;
 }
 
