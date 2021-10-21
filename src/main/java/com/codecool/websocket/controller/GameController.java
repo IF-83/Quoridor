@@ -75,6 +75,7 @@ public class GameController {
         }
         Gson gson = new Gson();
         List<Cell> cells = gson.fromJson(file,new TypeToken<List<Cell>>() {}.getType());
+        cells.forEach(x -> x.setGame(game));
         System.out.println(cells);
         game.setCells(cells);
         Long gameId = gamerep.save(game).getGameId();
