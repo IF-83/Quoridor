@@ -75,10 +75,16 @@ public class GameController {
         }
         Gson gson = new Gson();
         List<Cell> cells = gson.fromJson(file,new TypeToken<List<Cell>>() {}.getType());
-        cells.forEach(x -> x.setGame(game));
+        //cells.forEach(x -> x.setGame(game));
         System.out.println(cells);
         game.setCells(cells);
+        game.setJsonFromCells();
+        System.out.println(game);
         Long gameId = gamerep.save(game).getGameId();
+        //Optional<Game> game2 = gamerep.findById(Long.valueOf(gameId));
+        //if (game2.isPresent()){
+        //    System.out.println(game2.get().getCellsJson());
+        //}
         Response resp = Response.builder()
                 .gameId(gameId)
                 .player(player)
