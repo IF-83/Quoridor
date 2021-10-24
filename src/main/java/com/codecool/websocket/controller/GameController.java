@@ -1,5 +1,6 @@
 package com.codecool.websocket.controller;
 
+import com.codecool.websocket.models.MoveOutcomeTypes;
 import com.google.gson.reflect.TypeToken;
 import com.codecool.websocket.models.Request;
 import com.codecool.websocket.models.Response;
@@ -39,15 +40,19 @@ public class GameController {
         //@SendTo("/topic/greetings/{gameId}")
         public void greeting(@DestinationVariable String gameId, Request request) throws Exception {
         System.out.println("Meghívtam az endpointot ");
-        Optional<Game> game = gamerep.findById(Long.valueOf(gameId));
-        if(game.isPresent()){
+        Optional<Game> optionalGame = gamerep.findById(Long.valueOf(gameId));
+        if(optionalGame.isPresent()){
+            Game game = optionalGame.get();
+            game.setCellsFromJson();
             System.out.println("Game FOUND");
             String cellId = HtmlUtils.htmlEscape(request.getCellId());
             String player = HtmlUtils.htmlEscape(request.getPlayer());
             System.out.println(player);
-                if (game.get().getNextPlayer().equals(player)) {
-                    game.get().setNextPlayer(player.equals("player1") ? "player2" : "player1");
-                    gamerep.save(game.get());
+                if (game.getNextPlayer().equals(player)
+                        && game.tryMove(Integer.valueOf(cellId)) == MoveOutcomeTypes.SUCCESS) {
+                    game.setNextPlayer(player.equals("player1") ? "player2" : "player1");
+                    game.setJsonFromCells();
+                    gamerep.save(game);
                     simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",new Response(cellId,player));
                     simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(cellId,player));
                 } else  {

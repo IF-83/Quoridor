@@ -1,6 +1,7 @@
 package com.codecool.websocket.storage;
 
 
+import com.codecool.websocket.models.MoveOutcomeTypes;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.*;
@@ -25,6 +26,9 @@ public class Game {
     private String cellsJson;
 
     private String nextPlayer;
+    private int availableWallsPlayer1 = 10;
+    private int availableWallsPlayer2 = 10;
+
 
     @Id
     @GeneratedValue( strategy= GenerationType.AUTO )
@@ -42,6 +46,43 @@ public class Game {
         Gson gson = new Gson();
         this.cells = gson.fromJson(this.cellsJson,new TypeToken<List<Cell>>() {}.getType());
         //cells.forEach(x -> x.setGame(this));
+    }
+
+    public MoveOutcomeTypes tryMove (int cellID) {
+        MoveOutcomeTypes result;
+        Cell cell = cells.get(cellID - 1);
+        if (cell.getType().equals("stepField")) {
+            result = checkStep(cellID);
+        } else if (!cell.getType().equals("corner")){
+            result = checkWallPlacement(cellID);
+        } else {
+            result = MoveOutcomeTypes.INVALID_WALL_PLACEMENT;
+        }
+        return result;
+    }
+
+    //TODO: complete function
+    private MoveOutcomeTypes checkWallPlacement(int cellID) {
+        return null;
+    }
+
+    private MoveOutcomeTypes checkStep(int cellID) {
+        int currentCellID = 666;
+        for (int i = 0; i < cells.size(); i++) {
+            if (cells.get(i).getPlayer().equals(nextPlayer)) {
+                // cell numbering starts from 1
+                currentCellID = i + 1;
+                break;
+            }
+        }
+        int difference = Math.abs(cellID - currentCellID);
+        if (difference != 2 && difference != 34) {
+            return MoveOutcomeTypes.INVALID_STEP;
+        } else {
+            cells.get(currentCellID).setPlayer("player0");
+            cells.get(cellID).setPlayer(nextPlayer);
+            return MoveOutcomeTypes.SUCCESS;
+        }
     }
 
 }
