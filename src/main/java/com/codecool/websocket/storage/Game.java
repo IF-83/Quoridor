@@ -75,14 +75,39 @@ public class Game {
                 break;
             }
         }
+
         int difference = Math.abs(cellID - currentCellID);
-        if (difference != 2 && difference != 34) {
-            return MoveOutcomeTypes.INVALID_STEP;
-        } else {
-            cells.get(currentCellID).setPlayer("player0");
-            cells.get(cellID).setPlayer(nextPlayer);
-            return MoveOutcomeTypes.SUCCESS;
+        // STEP
+        if (difference == 2 || difference == 34) {
+            if (isWallBetween(currentCellID, cellID) || isOccupied(cellID)) {
+                return MoveOutcomeTypes.INVALID_STEP;
+            }
+        // STRAIGHT JUMP
+        } else if (difference == 4 || difference == 68) {
+            if (isWallBetween(currentCellID, cellID) || !isPlayerBetween(currentCellID, cellID)) {
+                return MoveOutcomeTypes.INVALID_STEP;
+            }
         }
+        //TODO: handle diagonal jumps
+
+        cells.get(currentCellID).setPlayer("player0");
+        cells.get(cellID).setPlayer(nextPlayer);
+        return MoveOutcomeTypes.SUCCESS;
+
+    }
+
+    private boolean isWallBetween (int currentCellID, int targetCellID) {
+        int cellIDToCheck = (currentCellID + targetCellID) / 2;
+        return (cells.get(cellIDToCheck).getType().equals("wall"));
+    }
+
+    private boolean isOccupied (int targetCellID) {
+        return !cells.get(targetCellID).getPlayer().equals("player0");
+    }
+
+    private boolean isPlayerBetween (int currentCellID, int targetCellID) {
+        int cellIDToCheck = (currentCellID + targetCellID) / 2;
+        return !cells.get(cellIDToCheck).getPlayer().equals("player0");
     }
 
 }
