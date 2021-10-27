@@ -66,16 +66,20 @@ public class Game {
         return null;
     }
 
-    private MoveOutcomeTypes checkStep(int cellID) {
-        int currentCellID = 666;
+
+    private int findNextPlayerCellID() {
+        int currentCellID = -1;
         for (int i = 0; i < cells.size(); i++) {
             if (cells.get(i).getPlayer().equals(nextPlayer)) {
-                // cell numbering starts from 1
-                currentCellID = i + 1;
+                currentCellID = i + 1; // cell ID numbering starts from 1
                 break;
             }
         }
+        return currentCellID;
+    }
 
+    private MoveOutcomeTypes checkStep(int cellID) {
+        int currentCellID = findNextPlayerCellID();
         int difference = Math.abs(cellID - currentCellID);
         // STEP
         if (difference == 2 || difference == 34) {
@@ -87,11 +91,17 @@ public class Game {
             if (isWallBetween(currentCellID, cellID) || !isPlayerBetween(currentCellID, cellID)) {
                 return MoveOutcomeTypes.INVALID_STEP;
             }
+        // DIAGONAL JUMP
+        } else if (difference == 36 || difference == 32) {
+            //TODO: test isPlayerForDiagonalJump
+            if (!isPlayerForDiagonalJump(difference, currentCellID, cellID)) {
+                return MoveOutcomeTypes.INVALID_STEP;
+            }
+            //TODO: create isWallForDiagonalJump and IsEndOfBoardForDiagonalJump AND connect with isPlayerForDiagonalJump
         }
-        //TODO: handle diagonal jumps
-
-        cells.get(currentCellID).setPlayer("player0");
-        cells.get(cellID).setPlayer(nextPlayer);
+        // TODO: invalidate jumps that are bigger than possible
+        cells.get(currentCellID - 1).setPlayer("player0"); // -1 to transform ID into index
+        cells.get(cellID - 1).setPlayer(nextPlayer); // -1 to transform ID into index
         return MoveOutcomeTypes.SUCCESS;
 
     }
@@ -110,5 +120,22 @@ public class Game {
         return !cells.get(cellIDToCheck).getPlayer().equals("player0");
     }
 
+    private boolean isPlayerForDiagonalJump (int difference, int currentCellID, int cellID) {
+        // -1 is to transform ID into index, +-2 is check the adjacent cells in that row
+        if (difference == 32) {
+            if (!cells.get(Math.min(currentCellID, cellID) -1 - 2).getPlayer().equals("player0")) {
+                return true;
+            } else if (!cells.get(Math.max(currentCellID, cellID) - 1 + 2).getPlayer().equals("player0")) {
+                return true;
+            }
+        } else if (difference == 36) {
+            if (!cells.get(Math.min(currentCellID, cellID) - 1 + 2).getPlayer().equals("player0")) {
+                return true;
+            } else if (!cells.get(Math.max(currentCellID, cellID) - 1 - 2).getPlayer().equals("player0")) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
