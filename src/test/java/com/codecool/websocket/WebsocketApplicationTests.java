@@ -1,10 +1,10 @@
-package com.codecool.quoridor;
+package com.codecool.websocket;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class QuoridorApplicationTests {
+class WebsocketApplicationTests {
 
     @Test
     void contextLoads() {

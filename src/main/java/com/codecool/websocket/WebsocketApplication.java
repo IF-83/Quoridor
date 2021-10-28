@@ -1,13 +1,12 @@
-package com.codecool.quoridor;
+package com.codecool.websocket;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class QuoridorApplication {
+public class WebsocketApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(QuoridorApplication.class, args);
+        SpringApplication.run(WebsocketApplication.class, args);
     }
-
 }
