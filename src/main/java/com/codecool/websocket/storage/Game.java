@@ -80,24 +80,23 @@ public class Game {
 
     private MoveOutcomeTypes checkStep(int cellID) {
         int currentCellID = findNextPlayerCellID();
-        int difference = Math.abs(cellID - currentCellID);
+        int difference = cellID - currentCellID;
+        int absDifference = Math.abs(difference);
         // STEP
-        if (difference == 2 || difference == 34) {
+        if (absDifference == 2 || absDifference == 34) {
             if (isWallBetween(currentCellID, cellID) || isOccupied(cellID)) {
                 return MoveOutcomeTypes.INVALID_STEP;
             }
-        // STRAIGHT JUMP
-        } else if (difference == 4 || difference == 68) {
+            // STRAIGHT JUMP
+        } else if (absDifference == 4 || absDifference == 68) {
             if (isWallBetween(currentCellID, cellID) || !isPlayerBetween(currentCellID, cellID)) {
                 return MoveOutcomeTypes.INVALID_STEP;
             }
-        // DIAGONAL JUMP
-        } else if (difference == 36 || difference == 32) {
-            //TODO: test isPlayerForDiagonalJump
-            if (!isPlayerForDiagonalJump(difference, currentCellID, cellID)) {
+            // DIAGONAL JUMP
+        } else if (absDifference == 36 || absDifference == 32) {
+            if (!isValidDiagonalJump(absDifference, difference, currentCellID, cellID)) {
                 return MoveOutcomeTypes.INVALID_STEP;
             }
-            //TODO: create isWallForDiagonalJump and IsEndOfBoardForDiagonalJump AND connect with isPlayerForDiagonalJump
         }
         // TODO: invalidate jumps that are bigger than possible
         cells.get(currentCellID - 1).setPlayer("player0"); // -1 to transform ID into index
@@ -120,22 +119,44 @@ public class Game {
         return !cells.get(cellIDToCheck).getPlayer().equals("player0");
     }
 
-    private boolean isPlayerForDiagonalJump (int difference, int currentCellID, int cellID) {
+    // TODO: check of opponent is on edge of board
+    private boolean isValidDiagonalJump(int absDifference, int difference, int currentCellID, int cellID) {
         // -1 is to transform ID into index, +-2 is check the adjacent cells in that row
-        if (difference == 32) {
-            if (!cells.get(Math.min(currentCellID, cellID) -1 - 2).getPlayer().equals("player0")) {
-                return true;
-            } else if (!cells.get(Math.max(currentCellID, cellID) - 1 + 2).getPlayer().equals("player0")) {
-                return true;
+        int diffSign = (int) Math.signum(difference);
+        if (absDifference == 32) {
+            int cellIDTopLeft = Math.min(currentCellID, cellID) - 2;
+            int cellIDBottomRight = Math.max(currentCellID, cellID) + 2;
+            if (!cells.get(cellIDTopLeft - 1).getPlayer().equals("player0")) {
+                int cellIDBehindOpponent = diffSign>0 ? cellIDTopLeft-1 : cellIDTopLeft-17;
+                if (isWall (cellIDBehindOpponent)) {
+                    return true;
+                }
+            } else if (!cells.get(cellIDBottomRight - 1).getPlayer().equals("player0")) {
+                int cellIDBehindOpponent = diffSign>0 ? cellIDBottomRight+17 : cellIDBottomRight+1;
+                if (isWall (cellIDBehindOpponent)) {
+                    return true;
+                }
             }
-        } else if (difference == 36) {
-            if (!cells.get(Math.min(currentCellID, cellID) - 1 + 2).getPlayer().equals("player0")) {
-                return true;
-            } else if (!cells.get(Math.max(currentCellID, cellID) - 1 - 2).getPlayer().equals("player0")) {
-                return true;
+        } else if (absDifference == 36) {
+            int cellIDTopRight = Math.min(currentCellID, cellID) + 2;
+            int cellIBottomLeft = Math.max(currentCellID, cellID) - 2;
+            if (!cells.get(cellIDTopRight - 1).getPlayer().equals("player0")) {
+                int cellIDBehindOpponent = diffSign>0 ? cellIDTopRight+1 : cellIDTopRight-17;
+                if (isWall (cellIDBehindOpponent)) {
+                    return true;
+                }
+            } else if (!cells.get(cellIBottomLeft - 1).getPlayer().equals("player0")) {
+                int cellIDBehindOpponent = diffSign>0 ? cellIBottomLeft+17 : cellIBottomLeft-1;
+                if (isWall (cellIDBehindOpponent)) {
+                    return true;
+                }
             }
         }
         return false;
+    }
+
+    private boolean isWall (int cellID) {
+        return cells.get(cellID - 1).getWallType().equals("empty");
     }
 }
 
