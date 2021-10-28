@@ -156,7 +156,7 @@ public class Game {
     }
 
     private boolean isWall (int cellID) {
-        return cells.get(cellID - 1).getWallType().equals("empty");
+        return !cells.get(cellID - 1).getWallType().equals("empty");
     }
 }
 
