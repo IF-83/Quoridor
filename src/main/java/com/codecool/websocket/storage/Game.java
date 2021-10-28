@@ -8,6 +8,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 
 
 //@Builder
@@ -61,10 +62,56 @@ public class Game {
         return result;
     }
 
-    //TODO: complete function
+
     private MoveOutcomeTypes checkWallPlacement(int cellID) {
-        return null;
+        Cell cell = cells.get(cellID - 1);
+
+        if (cell.getWallType().equals("solid")){
+            return MoveOutcomeTypes.INVALID_WALL_PLACEMENT;
+        }
+
+        if (nextPlayer.equals("player1")
+            && availableWallsPlayer1 == 0){
+            return MoveOutcomeTypes.NO_WALLS_LEFT;
+        }
+
+        if (nextPlayer.equals("player2")
+                && availableWallsPlayer2 == 0){
+            return MoveOutcomeTypes.NO_WALLS_LEFT;
+        }
+
+        Cell adjacentCorner = null;
+        Cell adjacentWall = null;
+        if (cell.getDirection().equals("vertical")){
+            adjacentCorner = cells.get(cellID + 16);
+            adjacentWall = cells.get(cellID + 33);
+        } else if (cell.getDirection().equals("horizontal")){
+            adjacentCorner = cells.get(cellID);
+            adjacentWall = cells.get(cellID + 1);
+        } else {
+            return MoveOutcomeTypes.INVALID_WALL_PLACEMENT;
+        }
+
+        if (adjacentCorner.getWallType().equals("solid")
+                || adjacentWall.getWallType().equals("solid")){
+                return MoveOutcomeTypes.INVALID_WALL_PLACEMENT;
+        }
+
+        cell.setWallType("solid");
+        adjacentCorner.setWallType("solid");
+        adjacentWall.setWallType("solid");
+
+        if (nextPlayer.equals("player1")){
+            this.availableWallsPlayer1--;
+        }
+
+        if (nextPlayer.equals("player2")){
+            this.availableWallsPlayer2--;
+        }
+
+        return MoveOutcomeTypes.SUCCESS;
     }
+
 
 
     private int findNextPlayerCellID() {
