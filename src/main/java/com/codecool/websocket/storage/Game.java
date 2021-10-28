@@ -83,17 +83,19 @@ public class Game {
         Cell adjacentCorner = null;
         Cell adjacentWall = null;
         if (cell.getDirection().equals("vertical")){
-            adjacentCorner = cells.get(cellID);
-            adjacentWall = cells.get(cellID + 1);
-        } else if (cell.getDirection().equals("horizontal")){
             adjacentCorner = cells.get(cellID + 16);
             adjacentWall = cells.get(cellID + 33);
+        } else if (cell.getDirection().equals("horizontal")){
+            adjacentCorner = cells.get(cellID);
+            adjacentWall = cells.get(cellID + 1);
         } else {
+            System.out.println("problem with direction");
             return MoveOutcomeTypes.INVALID_WALL_PLACEMENT;
         }
 
         if (adjacentCorner.getWallType().equals("solid")
                 || adjacentWall.getWallType().equals("solid")){
+                System.out.println("close adjacent wall");
                 return MoveOutcomeTypes.INVALID_WALL_PLACEMENT;
         }
 
