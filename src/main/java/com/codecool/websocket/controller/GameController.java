@@ -50,6 +50,7 @@ public class GameController {
             System.out.println(player);
                 if (game.getNextPlayer().equals(player)
                         && game.tryMove(Integer.valueOf(cellId)) == MoveOutcomeTypes.SUCCESS) {
+//                    game.executeStep(Integer.valueOf(cellId));
                     game.setNextPlayer(player.equals("player1") ? "player2" : "player1");
                     game.setJsonFromCells();
                     gamerep.save(game);
