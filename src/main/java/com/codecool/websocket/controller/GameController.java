@@ -50,6 +50,13 @@ public class GameController {
             System.out.println(player);
                 if (game.getNextPlayer().equals(player)
                         && game.tryMove(Integer.valueOf(cellId)) == MoveOutcomeTypes.SUCCESS) {
+                    game.whoHasWon();
+                    String winner = game.getWinner();
+                    if (winner != null) {
+                        System.out.println("winner is : " + winner);
+                        simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",Response.builder().winner("PLAYER " + winner + " HAS WON THE GAME").build());
+                        simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",Response.builder().winner("PLAYER " + winner + " HAS WON THE GAME").build());
+                    }
 //                    game.executeStep(Integer.valueOf(cellId));
                     game.setNextPlayer(player.equals("player1") ? "player2" : "player1");
                     game.setJsonFromCells();

@@ -12,6 +12,7 @@ public class Response {
     private Long gameId;
     private boolean invalidMove = false;
     private String errorMsg;
+    private String winner;
 
     public Response (Long gameId){
         this.gameId = gameId;

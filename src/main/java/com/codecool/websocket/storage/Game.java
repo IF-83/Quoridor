@@ -26,6 +26,7 @@ public class Game {
     @Lob
     private String cellsJson;
 
+    private String winner;
     private String nextPlayer;
     private int availableWallsPlayer1 = 10;
     private int availableWallsPlayer2 = 10;
@@ -154,16 +155,16 @@ public class Game {
 
     private boolean isWallBetween (int currentCellID, int targetCellID) {
         int cellIDToCheck = (currentCellID + targetCellID) / 2;
-        return (cells.get(cellIDToCheck).getType().equals("wall"));
+        return (cells.get(cellIDToCheck -1).getWallType().equals("solid"));
     }
 
     private boolean isOccupied (int targetCellID) {
-        return !cells.get(targetCellID).getPlayer().equals("player0");
+        return !cells.get(targetCellID -1).getPlayer().equals("player0");
     }
 
     private boolean isPlayerBetween (int currentCellID, int targetCellID) {
         int cellIDToCheck = (currentCellID + targetCellID) / 2;
-        return !cells.get(cellIDToCheck).getPlayer().equals("player0");
+        return !cells.get(cellIDToCheck -1).getPlayer().equals("player0");
     }
 
     // TODO: check of opponent is on edge of board
@@ -204,6 +205,20 @@ public class Game {
 
     private boolean isWall (int cellID) {
         return !cells.get(cellID - 1).getWallType().equals("empty");
+    }
+    public void whoHasWon() {
+
+    for (int i = 272; i <= 288; i += 2) {
+        if (cells.get(i).getPlayer().equals("player1")){
+             this.winner="player1";
+        }
+    }
+
+    for (int i = 0; i <= 16; i += 2) {
+        if (cells.get(i).getPlayer().equals("player2")){
+            this.winner = "player2";
+        }
+    }
     }
 }
 
