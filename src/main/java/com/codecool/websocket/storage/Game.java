@@ -136,12 +136,12 @@ public class Game {
                 return MoveOutcomeTypes.INVALID_STEP;
             }
             // STRAIGHT JUMP
+            //TODO: invalidate jump when opp is on edge of board
         } else if (absDifference == 4 || absDifference == 68) {
             if (isWallBetween(currentCellID, cellID) || !isPlayerBetween(currentCellID, cellID)) {
                 return MoveOutcomeTypes.INVALID_STEP;
             }
             // DIAGONAL JUMP
-            //TODO: invalidate jump when there is a wall in the way, or opp is on edge of board
         } else if (absDifference == 36 || absDifference == 32) {
             if (!isValidDiagonalJump(absDifference, difference, currentCellID, cellID)) {
                 return MoveOutcomeTypes.INVALID_STEP;
@@ -155,8 +155,18 @@ public class Game {
     }
 
     private boolean isWallBetween (int currentCellID, int targetCellID) {
-        int cellIDToCheck = (currentCellID + targetCellID) / 2;
-        return (cells.get(cellIDToCheck -1).getWallType().equals("solid"));
+        int smaller = Math.min(currentCellID, targetCellID);
+        if (Math.abs(currentCellID - targetCellID) > 4) {
+            for (int i = 0; i + smaller < Math.max(currentCellID, targetCellID); i += 17) {
+                if (cells.get(smaller + i - 1).getWallType().equals("solid")) {
+                    return true;
+                }
+            }
+        } else {
+            int cellIDToCheck = (currentCellID + targetCellID) / 2;
+            return (cells.get(cellIDToCheck - 1).getWallType().equals("solid"));
+        }
+        return false;
     }
 
     private boolean isOccupied (int targetCellID) {
