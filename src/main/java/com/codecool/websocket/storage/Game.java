@@ -141,6 +141,7 @@ public class Game {
                 return MoveOutcomeTypes.INVALID_STEP;
             }
             // DIAGONAL JUMP
+            //TODO: invalidate jump when there is a wall in the way, or opp is on edge of board
         } else if (absDifference == 36 || absDifference == 32) {
             if (!isValidDiagonalJump(absDifference, difference, currentCellID, cellID)) {
                 return MoveOutcomeTypes.INVALID_STEP;
@@ -167,45 +168,74 @@ public class Game {
         return !cells.get(cellIDToCheck -1).getPlayer().equals("player0");
     }
 
-    // TODO: check of opponent is on edge of board
     private boolean isValidDiagonalJump(int absDifference, int difference, int currentCellID, int cellID) {
         // -1 is to transform ID into index, +-2 is check the adjacent cells in that row
         int diffSign = (int) Math.signum(difference);
+        // /-jump
         if (absDifference == 32) {
             int cellIDTopLeft = Math.min(currentCellID, cellID) - 2;
             int cellIDBottomRight = Math.max(currentCellID, cellID) + 2;
-            if (!cells.get(cellIDTopLeft - 1).getPlayer().equals("player0")) {
-                int cellIDBehindOpponent = diffSign>0 ? cellIDTopLeft-1 : cellIDTopLeft-17;
-                if (isWall (cellIDBehindOpponent)) {
-                    return true;
-                }
-            } else if (!cells.get(cellIDBottomRight - 1).getPlayer().equals("player0")) {
-                int cellIDBehindOpponent = diffSign>0 ? cellIDBottomRight+17 : cellIDBottomRight+1;
-                if (isWall (cellIDBehindOpponent)) {
-                    return true;
-                }
+            if (hasDiagJumpReqs(cellIDTopLeft, diffSign, -1, -17)) {
+                return true;
             }
+            if (hasDiagJumpReqs(cellIDBottomRight, diffSign, +17, +1)) {
+                return true;
+            }
+        // \-jump
         } else if (absDifference == 36) {
             int cellIDTopRight = Math.min(currentCellID, cellID) + 2;
             int cellIBottomLeft = Math.max(currentCellID, cellID) - 2;
-            if (!cells.get(cellIDTopRight - 1).getPlayer().equals("player0")) {
-                int cellIDBehindOpponent = diffSign>0 ? cellIDTopRight+1 : cellIDTopRight-17;
-                if (isWall (cellIDBehindOpponent)) {
-                    return true;
-                }
-            } else if (!cells.get(cellIBottomLeft - 1).getPlayer().equals("player0")) {
-                int cellIDBehindOpponent = diffSign>0 ? cellIBottomLeft+17 : cellIBottomLeft-1;
-                if (isWall (cellIDBehindOpponent)) {
-                    return true;
-                }
+            if (hasDiagJumpReqs(cellIDTopRight, diffSign, +1, -17)) {
+                return true;
+            }
+            if (hasDiagJumpReqs(cellIBottomLeft, diffSign, +17, -1)) {
+                return true;
             }
         }
         return false;
     }
 
+    private boolean hasDiagJumpReqs (int cellIDToCheck, int diffSign, int posDiffAddition, int negDiffAddition) {
+        int cellIDBehindOpponent;
+        if (!cells.get(cellIDToCheck - 1).getPlayer().equals("player0")) {
+            if (diffSign > 0) {
+                cellIDBehindOpponent = cellIDToCheck + posDiffAddition;
+                if (isOppOnEdgeOfBoard(cellIDBehindOpponent, posDiffAddition)) {
+                    return true;
+                }
+            } else {
+                cellIDBehindOpponent = cellIDToCheck + negDiffAddition;
+                if (isOppOnEdgeOfBoard(cellIDBehindOpponent, negDiffAddition)) {
+                    return true;
+                }
+            }
+            if (isWall(cellIDBehindOpponent)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isOppOnEdgeOfBoard (int cellIDBehindOpponent, int addition) {
+        if (Math.abs(addition) > 1) {
+            return isOutOfBoard(cellIDBehindOpponent);
+        } else {
+            return isOutOfBoard(cellIDBehindOpponent) || isHorizWall(cellIDBehindOpponent);
+        }
+    }
+
     private boolean isWall (int cellID) {
         return !cells.get(cellID - 1).getWallType().equals("empty");
     }
+
+    private boolean isOutOfBoard (int cellID) {
+        return cellID < 1 || cellID > 289;
+    }
+
+    private boolean isHorizWall (int cellID) {
+        return cells.get(cellID - 1).getDirection().equals("horizontal");
+    }
+
     public void whoHasWon() {
 
     for (int i = 272; i <= 288; i += 2) {
