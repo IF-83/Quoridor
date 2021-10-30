@@ -135,22 +135,32 @@ public class Game {
             if (isWallBetween(currentCellID, cellID) || isOccupied(cellID)) {
                 return MoveOutcomeTypes.INVALID_STEP;
             }
+            cells.get(currentCellID - 1).setPlayer("player0"); // -1 to transform ID into index
+            cells.get(cellID - 1).setPlayer(nextPlayer); // -1 to transform ID into index
+            return MoveOutcomeTypes.SUCCESS;
             // STRAIGHT JUMP
             //TODO: invalidate jump when opp is on edge of board
         } else if (absDifference == 4 || absDifference == 68) {
             if (isWallBetween(currentCellID, cellID) || !isPlayerBetween(currentCellID, cellID)) {
                 return MoveOutcomeTypes.INVALID_STEP;
             }
+            cells.get(currentCellID - 1).setPlayer("player0"); // -1 to transform ID into index
+            cells.get(cellID - 1).setPlayer(nextPlayer); // -1 to transform ID into index
+            return MoveOutcomeTypes.SUCCESS;
             // DIAGONAL JUMP
         } else if (absDifference == 36 || absDifference == 32) {
             if (!isValidDiagonalJump(absDifference, difference, currentCellID, cellID)) {
                 return MoveOutcomeTypes.INVALID_STEP;
             }
+            cells.get(currentCellID - 1).setPlayer("player0"); // -1 to transform ID into index
+            cells.get(cellID - 1).setPlayer(nextPlayer); // -1 to transform ID into index
+            return MoveOutcomeTypes.SUCCESS;
         }
+
         // TODO: invalidate jumps that are bigger than possible
-        cells.get(currentCellID - 1).setPlayer("player0"); // -1 to transform ID into index
-        cells.get(cellID - 1).setPlayer(nextPlayer); // -1 to transform ID into index
-        return MoveOutcomeTypes.SUCCESS;
+//        cells.get(currentCellID - 1).setPlayer("player0"); // -1 to transform ID into index
+//        cells.get(cellID - 1).setPlayer(nextPlayer); // -1 to transform ID into index
+        return MoveOutcomeTypes.INVALID_STEP;
 
     }
 
@@ -158,13 +168,18 @@ public class Game {
         int smaller = Math.min(currentCellID, targetCellID);
         if (Math.abs(currentCellID - targetCellID) > 4) {
             for (int i = 0; i + smaller < Math.max(currentCellID, targetCellID); i += 17) {
-                if (cells.get(smaller + i - 1).getWallType().equals("solid")) {
+                if (isWall(smaller + i)) {
                     return true;
                 }
             }
         } else {
-            int cellIDToCheck = (currentCellID + targetCellID) / 2;
-            return (cells.get(cellIDToCheck - 1).getWallType().equals("solid"));
+            for (int i = 1; i + smaller < Math.max(currentCellID, targetCellID); i += 2) {
+                if (isWall(smaller + i)) {
+                    return true;
+                }
+            }
+//            int cellIDToCheck = (currentCellID + targetCellID) / 2;
+//            return (isWall(cellIDToCheck - 1));
         }
         return false;
     }
