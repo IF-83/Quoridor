@@ -19,7 +19,6 @@ public class Game {
 //    @OneToMany(mappedBy = "game", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @Lob
     private String cellsJson;
-
     private String winner;
     private String nextPlayer;
     private int availableWallsPlayer1 = 10;

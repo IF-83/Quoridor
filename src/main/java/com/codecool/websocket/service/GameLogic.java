@@ -11,13 +11,16 @@ import java.util.List;
 
 @Data
 public class GameLogic {
+    private Game game;
     private List<Cell> cells;
     private String winner;
     private String nextPlayer;
-    private int availableWallsPlayer1 = 10;
-    private int availableWallsPlayer2 = 10;
+    private int availableWallsPlayer1;
+    private int availableWallsPlayer2;
+    private MoveOutcomeType moveOutcomeType;
 
     public GameLogic(Game game) {
+        this.game = game;
         this.winner = game.getWinner();
         this.nextPlayer = game.getNextPlayer();
         this.availableWallsPlayer1=game.getAvailableWallsPlayer1();
@@ -25,17 +28,15 @@ public class GameLogic {
         this.cells = new Gson().fromJson(game.getCellsJson(),new TypeToken<List<Cell>>() {}.getType());
     }
 
-    public MoveOutcomeType tryMove (int cellID) {
-        MoveOutcomeType result;
+    public void tryMove (int cellID) {
         Cell cell = cells.get(cellID - 1);
         if (cell.getType().equals("stepField")) {
-            result = checkStep(cellID);
+            this.moveOutcomeType = checkStep(cellID);
         } else if (!cell.getType().equals("corner")){
-            result = checkWallPlacement(cellID);
+            this.moveOutcomeType = checkWallPlacement(cellID);
         } else {
-            result = MoveOutcomeType.INVALID_WALL_PLACEMENT;
+            this.moveOutcomeType = MoveOutcomeType.INVALID_WALL_PLACEMENT;
         }
-        return result;
     }
 
 
@@ -79,10 +80,12 @@ public class GameLogic {
 
         if (nextPlayer.equals("player1")){
             this.availableWallsPlayer1--;
+            this.game.setAvailableWallsPlayer1(this.availableWallsPlayer1);
         }
 
         if (nextPlayer.equals("player2")){
             this.availableWallsPlayer2--;
+            this.game.setAvailableWallsPlayer2(this.availableWallsPlayer2);
         }
 
         return MoveOutcomeType.SUCCESS;

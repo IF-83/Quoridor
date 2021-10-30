@@ -45,23 +45,29 @@ public class GameController {
             String cellId = HtmlUtils.htmlEscape(request.getCellId());
             String player = HtmlUtils.htmlEscape(request.getPlayer());
             System.out.println(player);
-                if (game.getNextPlayer().equals(player)
-                        && gameLogic.tryMove(Integer.valueOf(cellId)) == MoveOutcomeType.SUCCESS) {
-                    gameLogic.whoHasWon();
-                    String winner = gameLogic.getWinner();
-                    if (winner != null) {
-                        System.out.println("winner is : " + winner);
-                        simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",Response.builder().winner("PLAYER " + winner + " HAS WON THE GAME").build());
-                        simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",Response.builder().winner("PLAYER " + winner + " HAS WON THE GAME").build());
+                if (game.getNextPlayer().equals(player)) {
+                    gameLogic.tryMove(Integer.valueOf(cellId));
+                    if(gameLogic.getMoveOutcomeType() == MoveOutcomeType.SUCCESS) {
+                        gameLogic.whoHasWon();
+                        String winner = gameLogic.getWinner();
+                        if (winner != null) {
+                            System.out.println("winner is : " + winner);
+                            simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/" + "player1", Response.builder().winner("PLAYER " + winner + " HAS WON THE GAME").build());
+                            simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/" + "player2", Response.builder().winner("PLAYER " + winner + " HAS WON THE GAME").build());
+                        }
+                        //                    game.executeStep(Integer.valueOf(cellId));
+                        game.setNextPlayer(player.equals("player1") ? "player2" : "player1");
+                        game.setJsonFromCells(gameLogic.getCells());
+                        gamerep.save(game);
+                        simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",new Response(cellId,player));
+                        simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(cellId,player));
+                    }else{
+                        simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/"+ player,Response.builder().invalidMove(true).errorMsg(gameLogic.getMoveOutcomeType().getErrorMsg()).build());
+
                     }
-//                    game.executeStep(Integer.valueOf(cellId));
-                    game.setNextPlayer(player.equals("player1") ? "player2" : "player1");
-                    game.setJsonFromCells(gameLogic.getCells());
-                    gamerep.save(game);
-                    simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",new Response(cellId,player));
-                    simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(cellId,player));
-                } else  {
-                    simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/"+ player,Response.builder().invalidMove(true).build());
+
+                } else {
+                    simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/"+ player,Response.builder().invalidMove(true).errorMsg("Not your turn!").build());
                     System.out.println(Response.builder().invalidMove(true).build());
                 }
             }else {
