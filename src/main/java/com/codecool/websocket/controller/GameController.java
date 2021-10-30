@@ -63,7 +63,6 @@ public class GameController {
                         simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(cellId,player));
                     }else{
                         simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/"+ player,Response.builder().invalidMove(true).errorMsg(gameLogic.getMoveOutcomeType().getErrorMsg()).build());
-
                     }
 
                 } else {
