@@ -1,6 +1,7 @@
 package com.codecool.websocket.controller;
 
 import com.codecool.websocket.models.MoveOutcomeType;
+import com.codecool.websocket.service.GameLogic;
 import com.google.gson.reflect.TypeToken;
 import com.codecool.websocket.models.Request;
 import com.codecool.websocket.models.Response;
@@ -39,14 +40,14 @@ public class GameController {
         Optional<Game> optionalGame = gamerep.findById(Long.valueOf(gameId));
         if(optionalGame.isPresent()){
             Game game = optionalGame.get();
-            game.setCellsFromJson();
+            GameLogic gameLogic = new GameLogic(game);
             System.out.println("Game FOUND");
             String cellId = HtmlUtils.htmlEscape(request.getCellId());
             String player = HtmlUtils.htmlEscape(request.getPlayer());
             System.out.println(player);
                 if (game.getNextPlayer().equals(player)
-                        && game.tryMove(Integer.valueOf(cellId)) == MoveOutcomeType.SUCCESS) {
-                    game.whoHasWon();
+                        && gameLogic.tryMove(Integer.valueOf(cellId)) == MoveOutcomeType.SUCCESS) {
+                    gameLogic.whoHasWon();
                     String winner = game.getWinner();
                     if (winner != null) {
                         System.out.println("winner is : " + winner);
@@ -55,7 +56,7 @@ public class GameController {
                     }
 //                    game.executeStep(Integer.valueOf(cellId));
                     game.setNextPlayer(player.equals("player1") ? "player2" : "player1");
-                    game.setJsonFromCells();
+                    game.setJsonFromCells(gameLogic.getCells());
                     gamerep.save(game);
                     simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",new Response(cellId,player));
                     simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(cellId,player));
@@ -86,8 +87,7 @@ public class GameController {
         List<Cell> cells = gson.fromJson(file,new TypeToken<List<Cell>>() {}.getType());
         //cells.forEach(x -> x.setGame(game));
         System.out.println(cells);
-        game.setCells(cells);
-        game.setJsonFromCells();
+        game.setJsonFromCells(cells);
         System.out.println(game);
         Long gameId = gamerep.save(game).getGameId();
         //Optional<Game> game2 = gamerep.findById(Long.valueOf(gameId));
