@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import lombok.*;
 
 import javax.persistence.*;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Optional;
 
@@ -119,49 +120,43 @@ public class Game {
         int currentCellID = -1;
         for (int i = 0; i < cells.size(); i++) {
             if (cells.get(i).getPlayer().equals(nextPlayer)) {
-                currentCellID = i + 1; // cell ID numbering starts from 1
+                currentCellID = i + 1; // +1 transforms index into ID
                 break;
             }
         }
         return currentCellID;
     }
 
-    private MoveOutcomeTypes checkStep(int cellID) {
+    private MoveOutcomeTypes checkStep(int targetCellID) {
         int currentCellID = findNextPlayerCellID();
-        int difference = cellID - currentCellID;
+        int difference = targetCellID - currentCellID;
         int absDifference = Math.abs(difference);
-        // STEP
-        if (absDifference == 2 || absDifference == 34) {
-            if (isWallBetween(currentCellID, cellID) || isOccupied(cellID)) {
+        boolean caseStep = absDifference == 2 || absDifference == 34; // 2 and 34 are the ID differences of horizontal and vertical steps
+        boolean caseJump = absDifference == 4 || absDifference == 68; // 4 and 68 are the ID differences of horizontal and vertical jumps
+        boolean caseDiagJump = absDifference == 36 || absDifference == 32; // 36 and 32 are the ID differences of diagonal jumps
+        if (caseStep) {
+            if (isWallBetween(currentCellID, targetCellID) || isOccupied(targetCellID)) {
                 return MoveOutcomeTypes.INVALID_STEP;
             }
-            cells.get(currentCellID - 1).setPlayer("player0"); // -1 to transform ID into index
-            cells.get(cellID - 1).setPlayer(nextPlayer); // -1 to transform ID into index
-            return MoveOutcomeTypes.SUCCESS;
-            // STRAIGHT JUMP
-            //TODO: invalidate jump when opp is on edge of board
-        } else if (absDifference == 4 || absDifference == 68) {
-            if (isWallBetween(currentCellID, cellID) || !isPlayerBetween(currentCellID, cellID)) {
+            return executeStepOrJump(currentCellID, targetCellID);
+        } else if (caseJump) {
+            if (isWallBetween(currentCellID, targetCellID) || !isPlayerBetween(currentCellID, targetCellID)) {
                 return MoveOutcomeTypes.INVALID_STEP;
             }
-            cells.get(currentCellID - 1).setPlayer("player0"); // -1 to transform ID into index
-            cells.get(cellID - 1).setPlayer(nextPlayer); // -1 to transform ID into index
-            return MoveOutcomeTypes.SUCCESS;
-            // DIAGONAL JUMP
-        } else if (absDifference == 36 || absDifference == 32) {
-            if (!isValidDiagonalJump(absDifference, difference, currentCellID, cellID)) {
+            return executeStepOrJump(currentCellID, targetCellID);
+        } else if (caseDiagJump) {
+            if (!isValidDiagonalJump(absDifference, difference, currentCellID, targetCellID)) {
                 return MoveOutcomeTypes.INVALID_STEP;
             }
-            cells.get(currentCellID - 1).setPlayer("player0"); // -1 to transform ID into index
-            cells.get(cellID - 1).setPlayer(nextPlayer); // -1 to transform ID into index
-            return MoveOutcomeTypes.SUCCESS;
+            return executeStepOrJump(currentCellID, targetCellID);
         }
-
-        // TODO: invalidate jumps that are bigger than possible
-//        cells.get(currentCellID - 1).setPlayer("player0"); // -1 to transform ID into index
-//        cells.get(cellID - 1).setPlayer(nextPlayer); // -1 to transform ID into index
         return MoveOutcomeTypes.INVALID_STEP;
+    }
 
+    private MoveOutcomeTypes executeStepOrJump (int currentCellID, int targetCellID) {
+        cells.get(currentCellID - 1).setPlayer("player0"); // -1 to transform ID into index
+        cells.get(targetCellID - 1).setPlayer(nextPlayer); // -1 to transform ID into index
+        return MoveOutcomeTypes.SUCCESS;
     }
 
     private boolean isWallBetween (int currentCellID, int targetCellID) {
@@ -178,8 +173,6 @@ public class Game {
                     return true;
                 }
             }
-//            int cellIDToCheck = (currentCellID + targetCellID) / 2;
-//            return (isWall(cellIDToCheck - 1));
         }
         return false;
     }
@@ -194,7 +187,9 @@ public class Game {
     }
 
     private boolean isValidDiagonalJump(int absDifference, int difference, int currentCellID, int cellID) {
-        // -1 is to transform ID into index, +-2 is check the adjacent cells in that row
+        // +-2 is to check the adjacent stepFields in a row
+        // +-17 is to check adjacent cells in a column
+        // +-1 is to check adjacent cells in a row
         int diffSign = (int) Math.signum(difference);
         // /-jump
         if (absDifference == 32) {
@@ -262,18 +257,16 @@ public class Game {
     }
 
     public void whoHasWon() {
-
-    for (int i = 272; i <= 288; i += 2) {
-        if (cells.get(i).getPlayer().equals("player1")){
-             this.winner="player1";
+        for (int i = 272; i <= 288; i += 2) {
+            if (cells.get(i).getPlayer().equals("player1")){
+                 this.winner="player1";
+            }
         }
-    }
-
-    for (int i = 0; i <= 16; i += 2) {
-        if (cells.get(i).getPlayer().equals("player2")){
-            this.winner = "player2";
+        for (int i = 0; i <= 16; i += 2) {
+            if (cells.get(i).getPlayer().equals("player2")){
+                this.winner = "player2";
+            }
         }
-    }
     }
 }
 
