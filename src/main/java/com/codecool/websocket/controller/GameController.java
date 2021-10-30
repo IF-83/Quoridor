@@ -48,7 +48,7 @@ public class GameController {
                 if (game.getNextPlayer().equals(player)
                         && gameLogic.tryMove(Integer.valueOf(cellId)) == MoveOutcomeType.SUCCESS) {
                     gameLogic.whoHasWon();
-                    String winner = game.getWinner();
+                    String winner = gameLogic.getWinner();
                     if (winner != null) {
                         System.out.println("winner is : " + winner);
                         simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",Response.builder().winner("PLAYER " + winner + " HAS WON THE GAME").build());
