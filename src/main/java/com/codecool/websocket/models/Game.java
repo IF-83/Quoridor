@@ -1,15 +1,12 @@
-package com.codecool.websocket.storage;
+package com.codecool.websocket.models;
 
 
-import com.codecool.websocket.models.MoveOutcomeTypes;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.*;
 
 import javax.persistence.*;
-import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Optional;
 
 
 //@Builder
@@ -38,48 +35,42 @@ public class Game {
     private Long gameId;
 
     public void setJsonFromCells(){
-        System.out.println("entered json creatiion");
         this.cellsJson = new Gson().toJson(cells, new TypeToken<List<Cell>>() {}.getType());
-        System.out.println("passed through json creatiion");
-
     }
-
 
     public void setCellsFromJson(){
-        Gson gson = new Gson();
-        this.cells = gson.fromJson(this.cellsJson,new TypeToken<List<Cell>>() {}.getType());
-        //cells.forEach(x -> x.setGame(this));
+        this.cells = new Gson().fromJson(this.cellsJson,new TypeToken<List<Cell>>() {}.getType());
     }
 
-    public MoveOutcomeTypes tryMove (int cellID) {
-        MoveOutcomeTypes result;
+    public MoveOutcomeType tryMove (int cellID) {
+        MoveOutcomeType result;
         Cell cell = cells.get(cellID - 1);
         if (cell.getType().equals("stepField")) {
             result = checkStep(cellID);
         } else if (!cell.getType().equals("corner")){
             result = checkWallPlacement(cellID);
         } else {
-            result = MoveOutcomeTypes.INVALID_WALL_PLACEMENT;
+            result = MoveOutcomeType.INVALID_WALL_PLACEMENT;
         }
         return result;
     }
 
 
-    private MoveOutcomeTypes checkWallPlacement(int cellID) {
+    private MoveOutcomeType checkWallPlacement(int cellID) {
         Cell cell = cells.get(cellID - 1);
 
         if (cell.getWallType().equals("solid")){
-            return MoveOutcomeTypes.INVALID_WALL_PLACEMENT;
+            return MoveOutcomeType.INVALID_WALL_PLACEMENT;
         }
 
         if (nextPlayer.equals("player1")
             && availableWallsPlayer1 == 0){
-            return MoveOutcomeTypes.NO_WALLS_LEFT;
+            return MoveOutcomeType.NO_WALLS_LEFT;
         }
 
         if (nextPlayer.equals("player2")
                 && availableWallsPlayer2 == 0){
-            return MoveOutcomeTypes.NO_WALLS_LEFT;
+            return MoveOutcomeType.NO_WALLS_LEFT;
         }
 
         Cell adjacentCorner = null;
@@ -91,12 +82,12 @@ public class Game {
             adjacentCorner = cells.get(cellID);
             adjacentWall = cells.get(cellID + 1);
         } else {
-            return MoveOutcomeTypes.INVALID_WALL_PLACEMENT;
+            return MoveOutcomeType.INVALID_WALL_PLACEMENT;
         }
 
         if (adjacentCorner.getWallType().equals("solid")
                 || adjacentWall.getWallType().equals("solid")){
-                return MoveOutcomeTypes.INVALID_WALL_PLACEMENT;
+                return MoveOutcomeType.INVALID_WALL_PLACEMENT;
         }
 
         cell.setWallType("solid");
@@ -111,7 +102,7 @@ public class Game {
             this.availableWallsPlayer2--;
         }
 
-        return MoveOutcomeTypes.SUCCESS;
+        return MoveOutcomeType.SUCCESS;
     }
 
 
@@ -127,7 +118,8 @@ public class Game {
         return currentCellID;
     }
 
-    private MoveOutcomeTypes checkStep(int targetCellID) {
+    private MoveOutcomeType checkStep(int targetCellID) {
+        //into an object?!
         int currentCellID = findNextPlayerCellID();
         int difference = targetCellID - currentCellID;
         int absDifference = Math.abs(difference);
@@ -136,27 +128,27 @@ public class Game {
         boolean caseDiagJump = absDifference == 36 || absDifference == 32; // 36 and 32 are the ID differences of diagonal jumps
         if (caseStep) {
             if (isWallBetween(currentCellID, targetCellID) || isOccupied(targetCellID)) {
-                return MoveOutcomeTypes.INVALID_STEP;
+                return MoveOutcomeType.INVALID_STEP;
             }
             return executeStepOrJump(currentCellID, targetCellID);
         } else if (caseJump) {
             if (isWallBetween(currentCellID, targetCellID) || !isPlayerBetween(currentCellID, targetCellID)) {
-                return MoveOutcomeTypes.INVALID_STEP;
+                return MoveOutcomeType.INVALID_STEP;
             }
             return executeStepOrJump(currentCellID, targetCellID);
         } else if (caseDiagJump) {
             if (!isValidDiagonalJump(absDifference, difference, currentCellID, targetCellID)) {
-                return MoveOutcomeTypes.INVALID_STEP;
+                return MoveOutcomeType.INVALID_STEP;
             }
             return executeStepOrJump(currentCellID, targetCellID);
         }
-        return MoveOutcomeTypes.INVALID_STEP;
+        return MoveOutcomeType.INVALID_STEP;
     }
 
-    private MoveOutcomeTypes executeStepOrJump (int currentCellID, int targetCellID) {
+    private MoveOutcomeType executeStepOrJump (int currentCellID, int targetCellID) {//maybe try-catch
         cells.get(currentCellID - 1).setPlayer("player0"); // -1 to transform ID into index
         cells.get(targetCellID - 1).setPlayer(nextPlayer); // -1 to transform ID into index
-        return MoveOutcomeTypes.SUCCESS;
+        return MoveOutcomeType.SUCCESS;
     }
 
     private boolean isWallBetween (int currentCellID, int targetCellID) {

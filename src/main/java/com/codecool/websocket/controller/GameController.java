@@ -1,12 +1,12 @@
 package com.codecool.websocket.controller;
 
-import com.codecool.websocket.models.MoveOutcomeTypes;
+import com.codecool.websocket.models.MoveOutcomeType;
 import com.google.gson.reflect.TypeToken;
 import com.codecool.websocket.models.Request;
 import com.codecool.websocket.models.Response;
-import com.codecool.websocket.storage.Cell;
-import com.codecool.websocket.storage.Game;
-import com.codecool.websocket.storage.repository.GameRepository;
+import com.codecool.websocket.models.Cell;
+import com.codecool.websocket.models.Game;
+import com.codecool.websocket.models.repository.GameRepository;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -18,13 +18,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.HtmlUtils;
 
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +45,7 @@ public class GameController {
             String player = HtmlUtils.htmlEscape(request.getPlayer());
             System.out.println(player);
                 if (game.getNextPlayer().equals(player)
-                        && game.tryMove(Integer.valueOf(cellId)) == MoveOutcomeTypes.SUCCESS) {
+                        && game.tryMove(Integer.valueOf(cellId)) == MoveOutcomeType.SUCCESS) {
                     game.whoHasWon();
                     String winner = game.getWinner();
                     if (winner != null) {

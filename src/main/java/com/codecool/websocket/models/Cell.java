@@ -1,5 +1,6 @@
-package com.codecool.websocket.storage;
+package com.codecool.websocket.models;
 
+import com.codecool.websocket.models.Game;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
