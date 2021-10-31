@@ -63,4 +63,28 @@ public class BoardGraph {
         return (int) (Math.floor(cell_id/34) * 9) + (cell_id % 17) / 2;
     }
 
+    private Set<FieldNode> component(FieldNode node) {
+        Set<FieldNode> comp = new HashSet<>();
+        comp.add(node);
+        Set<FieldNode> neighbors = null;
+        Set<FieldNode> newComp = null;
+        while(true) {
+            neighbors = new HashSet<>();
+            for (FieldNode f : comp) {
+                if (f.getLeft() != null) neighbors.add(f.getLeft());
+                if (f.getRight() != null) neighbors.add(f.getRight());
+                if (f.getUp() != null) neighbors.add(f.getUp());
+                if (f.getDown() != null) neighbors.add(f.getDown());
+            }
+            newComp = comp;
+            newComp.addAll(neighbors);
+            if (comp.size() == newComp.size()) {
+                break;
+            } else {
+                comp = newComp;
+            }
+        }
+        return comp;
+    }
+
 } // end class
