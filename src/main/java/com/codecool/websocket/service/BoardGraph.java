@@ -8,7 +8,13 @@ public class BoardGraph {
     public BoardGraph(GameLogic gameLogic) {
         int boardSize = 81; //9 rows X 9 columns
         for (int i = 0; i < boardSize; i++) {
-            nodes.add(new FieldNode());
+            if (i < 9){
+                nodes.add(new FieldNode(2));
+            } else if (i >= 72) {
+                nodes.add(new FieldNode(1));
+            } else {
+                nodes.add(new FieldNode(0));
+            }
         }
     }
 
