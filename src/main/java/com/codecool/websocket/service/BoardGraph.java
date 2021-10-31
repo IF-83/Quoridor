@@ -20,25 +20,28 @@ public class BoardGraph {
         System.out.println("empty graph created");
         // setting up edges:
         // vertical edges:
-        int firstCellInEightsRow = 63;
-        int firstWallInRow = 17;
+        int cell;
         int wallIndex = -1;
-        for (int i = 0; i <= firstCellInEightsRow; i += 9){
-            wallIndex = firstWallInRow;
-            for (int j = i; j <= i + 8; j++) {  // i + 8 is the last cell in the row
-                FieldNode upperField = nodes.get(j);
-                FieldNode lowerField = nodes.get(j+9);
-                System.out.println("setting up edges between fields " + j + " and " + (j+9));
-                System.out.println("wall between them is: " + wallIndex);
-                if (gameLogic.getCells().get(wallIndex).getWallType().equals("empty")) {
-                    upperField.setDown(lowerField);
-                    lowerField.setUp(upperField);
-                    System.out.println("edge is set");
-                }
-                wallIndex += 2;  //next is a stepField
+        for (cell = 0; cell <= 71; cell++){
+            if (cell % 9 == 0){
+                wallIndex = 34 * cell/9 + 17;
+            } else {
+                wallIndex += 2;
             }
-            firstWallInRow += 34; // jump 2 rows
+            System.out.println("connecting nodes " + cell + " and " + (cell+9) + " with wall " + wallIndex);
+            FieldNode upper = nodes.get(cell);
+            FieldNode lower = nodes.get(cell + 9);
+            if (gameLogic.getCells().get(wallIndex).getWallType().equals("empty")) {
+                upper.setDown(lower);
+                lower.setUp(upper);
+                System.out.println("edge set up");
+            }
         }
+
+        //horizontal edges
+        int firstCellInEightsCol = 7;
+
+
     } // end constructor
 
 
