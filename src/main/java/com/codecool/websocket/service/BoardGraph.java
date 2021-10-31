@@ -22,25 +22,36 @@ public class BoardGraph {
         // vertical edges:
         int cell;
         int wallIndex = -1;
+        System.out.println("vertical");
         for (cell = 0; cell <= 71; cell++){
             if (cell % 9 == 0){
                 wallIndex = 34 * cell/9 + 17;
             } else {
                 wallIndex += 2;
             }
-            System.out.println("connecting nodes " + cell + " and " + (cell+9) + " with wall " + wallIndex);
+            //System.out.println("connecting nodes " + cell + " and " + (cell+9) + " with wall " + wallIndex);
             FieldNode upper = nodes.get(cell);
             FieldNode lower = nodes.get(cell + 9);
             if (gameLogic.getCells().get(wallIndex).getWallType().equals("empty")) {
                 upper.setDown(lower);
                 lower.setUp(upper);
-                System.out.println("edge set up");
+                //System.out.println("edge set up");
             }
         }
 
         //horizontal edges
-        int firstCellInEightsCol = 7;
-
+        System.out.println("horizontal");
+        for (cell = 0, wallIndex = 1; cell < 80; cell = (cell + 9) % 80, wallIndex = (wallIndex + 34) % 304) {
+            FieldNode leftNode = nodes.get(cell);
+            FieldNode rightNode = nodes.get(cell + 1);
+            //System.out.println("connecting nodes " + cell + " and " + (cell+1) + " with wall " + wallIndex);
+            if (gameLogic.getCells().get(wallIndex).getWallType().equals("empty")){
+                leftNode.setRight(rightNode);
+                rightNode.setLeft(leftNode);
+                //System.out.println("edge set up");
+            }
+            if (cell == 79) break; //after 79 cell would be 8, but that is in the last col
+        }
 
     } // end constructor
 
