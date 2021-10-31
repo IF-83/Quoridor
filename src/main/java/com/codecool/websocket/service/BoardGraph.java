@@ -76,7 +76,8 @@ public class BoardGraph {
                 if (f.getUp() != null) neighbors.add(f.getUp());
                 if (f.getDown() != null) neighbors.add(f.getDown());
             }
-            newComp = comp;
+            newComp = new HashSet<>();
+            newComp.addAll(comp);
             newComp.addAll(neighbors);
             if (comp.size() == newComp.size()) {
                 break;
