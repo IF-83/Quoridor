@@ -34,14 +34,20 @@ public class GameLogic {
             this.moveOutcomeType = checkStep(cellID);
         } else if (!cell.getType().equals("corner")){
             this.moveOutcomeType = checkWallPlacement(cellID);
-        }else if (isPlayerBlocked(cellID)){
-            this.moveOutcomeType = MoveOutcomeType.PLAYER_SURROUNDED;
+            if (this.moveOutcomeType == moveOutcomeType.SUCCESS) {
+                if (isPlayerBlocked(cellID)) {
+                    this.moveOutcomeType = MoveOutcomeType.PLAYER_SURROUNDED;
+                }
+            }
         } else {
             this.moveOutcomeType = MoveOutcomeType.INVALID_WALL_PLACEMENT;
         }
     }
 //Sets enum to "PLAYER_SURROUNDED
     private boolean isPlayerBlocked(int cellID) {
+        System.out.println("is player blocked called");
+        BoardGraph boardGraph = new BoardGraph(this);
+
         return false;
     }
 
