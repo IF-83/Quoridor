@@ -1,8 +1,9 @@
 package com.codecool.websocket.service;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class FieldNode {
 
     private int winType = 0; // 0 = neutral, 1 = winning for player1, 2 = winning for player2
