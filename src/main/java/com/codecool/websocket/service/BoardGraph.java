@@ -87,4 +87,13 @@ public class BoardGraph {
         return comp;
     }
 
+    public boolean playerPathExists(int cellID, int playerFlag) {
+        FieldNode playerPosition = nodes.get(convertIndex(cellID));
+        Set<FieldNode> component = component(playerPosition);
+        for (FieldNode f : component) {
+            if (f.getWinType() == playerFlag) return true;
+        }
+        return false;
+    }
+
 } // end class
