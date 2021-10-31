@@ -1,6 +1,9 @@
 package com.codecool.websocket.service;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 
 public class BoardGraph {
 
@@ -17,12 +20,12 @@ public class BoardGraph {
                 nodes.add(new FieldNode(0));
             }
         } // creating empty graph;
-        System.out.println("empty graph created");
+        //System.out.println("empty graph created");
         // setting up edges:
         // vertical edges:
         int cell;
         int wallIndex = -1;
-        System.out.println("vertical");
+        //System.out.println("vertical");
         for (cell = 0; cell <= 71; cell++){
             if (cell % 9 == 0){
                 wallIndex = 34 * cell/9 + 17;
@@ -40,7 +43,7 @@ public class BoardGraph {
         }
 
         //horizontal edges
-        System.out.println("horizontal");
+        //System.out.println("horizontal");
         for (cell = 0, wallIndex = 1; cell < 80; cell = (cell + 9) % 80, wallIndex = (wallIndex + 34) % 304) {
             FieldNode leftNode = nodes.get(cell);
             FieldNode rightNode = nodes.get(cell + 1);
@@ -55,6 +58,9 @@ public class BoardGraph {
 
     } // end constructor
 
-
+    private int convertIndex(int cell_id) {
+        // converting the 0 - 288 based cell ID to 0 - 80 based index of nodes
+        return (int) (Math.floor(cell_id/34) * 9) + (cell_id % 17) / 2;
+    }
 
 } // end class

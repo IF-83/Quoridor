@@ -45,7 +45,7 @@ public class GameLogic {
     }
 //Sets enum to "PLAYER_SURROUNDED
     private boolean isPlayerBlocked(int cellID) {
-        System.out.println("is player blocked called");
+        //System.out.println("is player blocked called");
         BoardGraph boardGraph = new BoardGraph(this);
 
         return false;
