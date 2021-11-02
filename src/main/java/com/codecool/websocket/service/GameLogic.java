@@ -34,15 +34,40 @@ public class GameLogic {
             this.moveOutcomeType = checkStep(cellID);
         } else if (!cell.getType().equals("corner")){
             this.moveOutcomeType = checkWallPlacement(cellID);
-        }else if (isPlayerBlocked(cellID)){
-            this.moveOutcomeType = MoveOutcomeType.PLAYER_SURROUNDED;
+            if (this.moveOutcomeType == moveOutcomeType.SUCCESS) {
+                if (isPlayerBlocked(cellID)) {
+                    this.moveOutcomeType = MoveOutcomeType.PLAYER_SURROUNDED;
+                }
+            }
         } else {
             this.moveOutcomeType = MoveOutcomeType.INVALID_WALL_PLACEMENT;
         }
     }
 //Sets enum to "PLAYER_SURROUNDED
     private boolean isPlayerBlocked(int cellID) {
-        return false;
+        //System.out.println("is player blocked called");
+        BoardGraph boardGraph = new BoardGraph(this);
+        // very bad game if a player can be cornered by his/her own move
+        // so we check the winning path for both players
+
+        int player1CellID = -1;
+        int player2CellID = -1;
+
+        for (int i = 0; i < 289; i++) {
+            if (cells.get(i).getPlayer().equals("player1")) {
+                player1CellID = i;
+            }
+
+            if (cells.get(i).getPlayer().equals("player2")) {
+                player2CellID = i;
+            }
+
+        }
+
+        boolean player1PathExists = boardGraph.playerPathExists(player1CellID, 1);
+        boolean player2PathExists = boardGraph.playerPathExists(player2CellID, 2);
+
+        return !(player1PathExists && player2PathExists);
     }
 
 
