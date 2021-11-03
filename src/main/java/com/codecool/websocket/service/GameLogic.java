@@ -106,24 +106,6 @@ public class GameLogic {
         return MoveOutcomeType.SUCCESS;
     }
 
-    private boolean isWallBetween (int currentCellID, int targetCellID) {
-        int smaller = Math.min(currentCellID, targetCellID);
-        if (Math.abs(currentCellID - targetCellID) > 4) {
-            for (int i = 0; i + smaller < Math.max(currentCellID, targetCellID); i += 17) {
-                if (isWall(smaller + i)) {
-                    return true;
-                }
-            }
-        } else {
-            for (int i = 1; i + smaller < Math.max(currentCellID, targetCellID); i += 2) {
-                if (isWall(smaller + i)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     private boolean isOccupied (int targetCellID) {
         return !cells.get(targetCellID -1).getPlayer().equals("player0");
     }
@@ -189,10 +171,6 @@ public class GameLogic {
         } else {
             return isOutOfBoard(cellIDBehindOpponent) || isHorizWall(cellIDBehindOpponent);
         }
-    }
-
-    private boolean isWall (int cellID) {
-        return cells.get(cellID - 1).getWallType().equals("solid");
     }
 
     private boolean isOutOfBoard (int cellID) {

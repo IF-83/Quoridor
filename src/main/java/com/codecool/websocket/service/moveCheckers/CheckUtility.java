@@ -24,4 +24,8 @@ public class CheckUtility {
         return currentCellID;
     }
 
+    public boolean isWall (int cellID) {
+        return cells.get(cellID - 1).getWallType().equals("solid");
+    }
+
 }
