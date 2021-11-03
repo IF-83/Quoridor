@@ -3,6 +3,7 @@ package com.codecool.websocket.service;
 import com.codecool.websocket.models.Cell;
 import com.codecool.websocket.models.Game;
 import com.codecool.websocket.models.MoveOutcomeType;
+import com.codecool.websocket.service.moveCheckers.CheckUtility;
 import com.codecool.websocket.service.moveCheckers.StepChecker;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,9 +31,10 @@ public class GameLogic {
     }
 
     public void tryMove (int cellID) {
+        CheckUtility checkUtility = new CheckUtility(cells, nextPlayer);
         Cell cell = cells.get(cellID - 1);
         if (cell.getType().equals("stepField")) {
-            this.moveOutcomeType = new StepChecker().checkStep(cellID);
+            this.moveOutcomeType = new StepChecker().checkStep(cellID, checkUtility);
         } else if (!cell.getType().equals("corner")){
             this.moveOutcomeType = checkWallPlacement(cellID);
         }else if (isPlayerBlocked(cellID)){
@@ -96,17 +98,6 @@ public class GameLogic {
         }
 
         return MoveOutcomeType.SUCCESS;
-    }
-
-    private int findNextPlayerCellID() {
-        int currentCellID = -1;
-        for (int i = 0; i < cells.size(); i++) {
-            if (cells.get(i).getPlayer().equals(nextPlayer)) {
-                currentCellID = i + 1; // +1 transforms index into ID
-                break;
-            }
-        }
-        return currentCellID;
     }
 
     private MoveOutcomeType executeStepOrJump (int currentCellID, int targetCellID) {//maybe try-catch
