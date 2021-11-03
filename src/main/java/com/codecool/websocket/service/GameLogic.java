@@ -3,6 +3,7 @@ package com.codecool.websocket.service;
 import com.codecool.websocket.models.Cell;
 import com.codecool.websocket.models.Game;
 import com.codecool.websocket.models.MoveOutcomeType;
+import com.codecool.websocket.service.moveCheckers.StepChecker;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.Data;
@@ -31,7 +32,7 @@ public class GameLogic {
     public void tryMove (int cellID) {
         Cell cell = cells.get(cellID - 1);
         if (cell.getType().equals("stepField")) {
-            this.moveOutcomeType = checkStep(cellID);
+            this.moveOutcomeType = new StepChecker().checkStep(cellID);
         } else if (!cell.getType().equals("corner")){
             this.moveOutcomeType = checkWallPlacement(cellID);
         }else if (isPlayerBlocked(cellID)){
@@ -40,11 +41,11 @@ public class GameLogic {
             this.moveOutcomeType = MoveOutcomeType.INVALID_WALL_PLACEMENT;
         }
     }
+
 //Sets enum to "PLAYER_SURROUNDED
     private boolean isPlayerBlocked(int cellID) {
         return false;
     }
-
 
     private MoveOutcomeType checkWallPlacement(int cellID) {
         Cell cell = cells.get(cellID - 1);
@@ -97,8 +98,6 @@ public class GameLogic {
         return MoveOutcomeType.SUCCESS;
     }
 
-
-
     private int findNextPlayerCellID() {
         int currentCellID = -1;
         for (int i = 0; i < cells.size(); i++) {
@@ -108,33 +107,6 @@ public class GameLogic {
             }
         }
         return currentCellID;
-    }
-
-    private MoveOutcomeType checkStep(int targetCellID) {
-        //into an object?!
-        int currentCellID = findNextPlayerCellID();
-        int difference = targetCellID - currentCellID;
-        int absDifference = Math.abs(difference);
-        boolean caseStep = absDifference == 2 || absDifference == 34; // 2 and 34 are the ID differences of horizontal and vertical steps
-        boolean caseJump = absDifference == 4 || absDifference == 68; // 4 and 68 are the ID differences of horizontal and vertical jumps
-        boolean caseDiagJump = absDifference == 36 || absDifference == 32; // 36 and 32 are the ID differences of diagonal jumps
-        if (caseStep) {
-            if (isWallBetween(currentCellID, targetCellID) || isOccupied(targetCellID)) {
-                return MoveOutcomeType.INVALID_STEP;
-            }
-            return executeStepOrJump(currentCellID, targetCellID);
-        } else if (caseJump) {
-            if (isWallBetween(currentCellID, targetCellID) || !isPlayerBetween(currentCellID, targetCellID)) {
-                return MoveOutcomeType.INVALID_STEP;
-            }
-            return executeStepOrJump(currentCellID, targetCellID);
-        } else if (caseDiagJump) {
-            if (!isValidDiagonalJump(absDifference, difference, currentCellID, targetCellID)) {
-                return MoveOutcomeType.INVALID_STEP;
-            }
-            return executeStepOrJump(currentCellID, targetCellID);
-        }
-        return MoveOutcomeType.INVALID_STEP;
     }
 
     private MoveOutcomeType executeStepOrJump (int currentCellID, int targetCellID) {//maybe try-catch
