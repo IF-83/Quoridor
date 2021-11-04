@@ -4,7 +4,15 @@ import com.codecool.websocket.models.MoveOutcomeType;
 
 public class StepChecker {
 
-    public MoveOutcomeType checkStep (int targetCellID, CheckUtility checkUtility) {
+    private int targetCellID;
+    private CheckUtility checkUtility;
+
+    public StepChecker(int targetCellID, CheckUtility checkUtility) {
+        this.targetCellID = targetCellID;
+        this.checkUtility = checkUtility;
+    }
+
+    public MoveOutcomeType checkStep () {
         int currentCellID = checkUtility.findNextPlayerCellID();
         int difference = targetCellID - currentCellID;
         int absDifference = Math.abs(difference);

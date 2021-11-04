@@ -36,10 +36,10 @@ public class GameLogic {
         CheckUtility checkUtility = new CheckUtility(cells, nextPlayer);
         Cell cell = cells.get(targetCellID - 1);
         if (cell.getType().equals("stepField")) {
-            this.moveOutcomeType = new StepChecker().checkStep(targetCellID, checkUtility);
+            this.moveOutcomeType = new StepChecker(targetCellID, checkUtility).checkStep();
         } else if (!cell.getType().equals("corner")){
             this.moveOutcomeType = checkWallPlacement(targetCellID);
-        }else if (isPlayerBlocked(targetCellID)){
+        }else if (isPlayerBlocked()){
             this.moveOutcomeType = MoveOutcomeType.PLAYER_SURROUNDED;
         } else {
             this.moveOutcomeType = MoveOutcomeType.INVALID_WALL_PLACEMENT;
@@ -160,9 +160,9 @@ public class GameLogic {
                     return true;
                 }
             }
-            if (isWall(cellIDBehindOpponent)) {
-                return true;
-            }
+//            if (isWall(cellIDBehindOpponent)) {
+//                return true;
+//            }
         }
         return false;
     }
