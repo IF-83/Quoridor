@@ -20,8 +20,10 @@ public class GameLogic {
     private int availableWallsPlayer1;
     private int availableWallsPlayer2;
     private MoveOutcomeType moveOutcomeType;
+    private int targetCellID;
 
-    public GameLogic(Game game) {
+    public GameLogic(Game game, int targetCellID) {
+        this.targetCellID = targetCellID;
         this.game = game;
         this.winner = game.getWinner();
         this.nextPlayer = game.getNextPlayer();
@@ -30,14 +32,14 @@ public class GameLogic {
         this.cells = new Gson().fromJson(game.getCellsJson(),new TypeToken<List<Cell>>() {}.getType());
     }
 
-    public void tryMove (int cellID) {
+    public void tryMove () {
         CheckUtility checkUtility = new CheckUtility(cells, nextPlayer);
-        Cell cell = cells.get(cellID - 1);
+        Cell cell = cells.get(targetCellID - 1);
         if (cell.getType().equals("stepField")) {
-            this.moveOutcomeType = new StepChecker().checkStep(cellID, checkUtility);
+            this.moveOutcomeType = new StepChecker().checkStep(targetCellID, checkUtility);
         } else if (!cell.getType().equals("corner")){
-            this.moveOutcomeType = checkWallPlacement(cellID);
-        }else if (isPlayerBlocked(cellID)){
+            this.moveOutcomeType = checkWallPlacement(targetCellID);
+        }else if (isPlayerBlocked(targetCellID)){
             this.moveOutcomeType = MoveOutcomeType.PLAYER_SURROUNDED;
         } else {
             this.moveOutcomeType = MoveOutcomeType.INVALID_WALL_PLACEMENT;
