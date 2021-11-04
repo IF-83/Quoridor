@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
-public class Game {
+public class GameData {
 //    @Singular
 //    @EqualsAndHashCode.Exclude
 //    @OneToMany(mappedBy = "game", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})

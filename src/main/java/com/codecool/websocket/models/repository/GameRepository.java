@@ -1,8 +1,8 @@
 package com.codecool.websocket.models.repository;
 
-import com.codecool.websocket.models.Game;
+import com.codecool.websocket.models.GameData;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface GameRepository extends JpaRepository<Game, Long> {
+public interface GameRepository extends JpaRepository<GameData, Long> {
     //OK
 }

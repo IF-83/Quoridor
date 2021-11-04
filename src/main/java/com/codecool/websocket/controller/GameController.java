@@ -1,12 +1,18 @@
 package com.codecool.websocket.controller;
 
 import com.codecool.websocket.models.MoveOutcomeType;
-import com.codecool.websocket.service.GameLogic;
+import com.codecool.websocket.service.ActionValidator;
+import com.codecool.websocket.service.BoardState;
+import com.codecool.websocket.service.GameState;
+import com.codecool.websocket.service.actionCheckers.DiagJumpValidator;
+import com.codecool.websocket.service.actionCheckers.DiagJumpVerifier;
+import com.codecool.websocket.service.actionCheckers.MovementChecker;
+import com.codecool.websocket.service.actionCheckers.WallPlacementChecker;
 import com.google.gson.reflect.TypeToken;
 import com.codecool.websocket.models.Request;
 import com.codecool.websocket.models.Response;
 import com.codecool.websocket.models.Cell;
-import com.codecool.websocket.models.Game;
+import com.codecool.websocket.models.GameData;
 import com.codecool.websocket.models.repository.GameRepository;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,28 +42,36 @@ public class GameController {
     @MessageMapping("/game/{gameId}")
         //@SendTo("/topic/greetings/{gameId}")
         public void greeting(@DestinationVariable String gameId, Request request) throws Exception {
-        Optional<Game> optionalGame = gamerep.findById(Long.valueOf(gameId));
-        if(optionalGame.isPresent()){
-            Game game = optionalGame.get();
-            String cellIDString = HtmlUtils.htmlEscape(request.getCellId());
+        Optional<GameData> optionalGameData = gamerep.findById(Long.valueOf(gameId));
+        if(optionalGameData.isPresent()){
+            GameData gameData = optionalGameData.get();
+            int targetCellID = Integer.parseInt(HtmlUtils.htmlEscape(request.getCellId()));
             String player = HtmlUtils.htmlEscape(request.getPlayer());
-            GameLogic gameLogic = new GameLogic(game, Integer.parseInt(cellIDString));
-                if (game.getNextPlayer().equals(player)) {
-                    gameLogic.tryMove();
-                    if(gameLogic.getMoveOutcomeType() == MoveOutcomeType.SUCCESS) {
-                        gameLogic.whoHasWon();
-                        String winner = gameLogic.getWinner();
+            GameState gameState = new GameState(gameData, targetCellID);
+                if (gameData.getNextPlayer().equals(player)) {
+
+                    BoardState boardState = new BoardState(gameState.getCells(), gameState.getNextPlayer());
+                    DiagJumpVerifier diagJumpVerifier = new DiagJumpVerifier(boardState);
+                    DiagJumpValidator diagJumpValidator = new DiagJumpValidator(diagJumpVerifier, boardState, targetCellID);
+                    MovementChecker movementChecker = new MovementChecker(targetCellID, boardState, diagJumpValidator);
+                    WallPlacementChecker wallPlacementChecker = new WallPlacementChecker(gameState);
+                    ActionValidator actionValidator = new ActionValidator(movementChecker, wallPlacementChecker, boardState, targetCellID);
+                    gameState.setMoveOutcomeType(actionValidator.tryPlayerAction());
+
+                    if(gameState.getMoveOutcomeType() == MoveOutcomeType.SUCCESS) {
+                        gameState.whoHasWon();
+                        String winner = gameState.getWinner();
                         if (winner != null) {
                             simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/" + "player1", Response.builder().winner("PLAYER " + winner + " HAS WON THE GAME").build());
                             simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/" + "player2", Response.builder().winner("PLAYER " + winner + " HAS WON THE GAME").build());
                         }
-                        game.setNextPlayer(player.equals("player1") ? "player2" : "player1");
-                        game.setJsonFromCells(gameLogic.getCells());
-                        gamerep.save(game);
-                        simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",new Response(cellIDString,player));
-                        simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(cellIDString,player));
+                        gameData.setNextPlayer(player.equals("player1") ? "player2" : "player1");
+                        gameData.setJsonFromCells(gameState.getCells());
+                        gamerep.save(gameData);
+                        simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",new Response(String.valueOf(targetCellID),player));
+                        simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(String.valueOf(targetCellID),player));
                     }else{
-                        simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/"+ player,Response.builder().invalidMove(true).errorMsg(gameLogic.getMoveOutcomeType().getErrorMsg()).build());
+                        simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/"+ player,Response.builder().invalidMove(true).errorMsg(gameState.getMoveOutcomeType().getErrorMsg()).build());
                     }
 
                 } else {
@@ -72,9 +86,9 @@ public class GameController {
     @GetMapping("/fetchNextGame")
     @CrossOrigin
     public Response fetchGame(){
-        Game game = new Game();
+        GameData gameData = new GameData();
         String player = "player1";
-        game.setNextPlayer(player);
+        gameData.setNextPlayer(player);
         String file = null;
         try {
             file = Files.readString(Paths.get("./src/main/resources/initBoard.json"));
@@ -83,8 +97,8 @@ public class GameController {
         }
         Gson gson = new Gson();
         List<Cell> cells = gson.fromJson(file,new TypeToken<List<Cell>>() {}.getType());
-        game.setJsonFromCells(cells);
-        Long gameId = gamerep.save(game).getGameId();
+        gameData.setJsonFromCells(cells);
+        Long gameId = gamerep.save(gameData).getGameId();
         Response resp = Response.builder()
                 .gameId(gameId)
                 .player(player)

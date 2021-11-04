@@ -1,6 +1,5 @@
 package com.codecool.websocket.models;
 
-import com.codecool.websocket.models.Game;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +15,7 @@ import javax.persistence.*;
 public class Cell {
 
     @ManyToOne
-    private Game game;
+    private GameData gameData;
 
     private String type;
     private String player;
