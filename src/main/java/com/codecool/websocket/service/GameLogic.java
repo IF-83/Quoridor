@@ -199,25 +199,39 @@ public class GameLogic {
         // +-2 is to check the adjacent stepFields in a row
         // +-17 is to check adjacent cells in a column
         // +-1 is to check adjacent cells in a row
+        int opponentCellId = findOpponentID();
         int diffSign = (int) Math.signum(difference);
-        // /-jump
+        // /-jump right diagonal jump
         if (absDifference == 32) {
             int cellIDTopLeft = Math.min(currentCellID, cellID) - 2;
             int cellIDBottomRight = Math.max(currentCellID, cellID) + 2;
             if (hasDiagJumpReqs(cellIDTopLeft, diffSign, -1, -17)) {
+                //check if the jump target and current pos is divided by a wall
+                if(isWallBetween(opponentCellId,cellID)) {
+                    return false;
+                }
                 return true;
             }
             if (hasDiagJumpReqs(cellIDBottomRight, diffSign, +17, +1)) {
+                if(isWallBetween(opponentCellId,cellID)) {
+                    return false;
+                }
                 return true;
             }
-            // \-jump
+            // \-jump left diagonal jump
         } else if (absDifference == 36) {
             int cellIDTopRight = Math.min(currentCellID, cellID) + 2;
             int cellIBottomLeft = Math.max(currentCellID, cellID) - 2;
             if (hasDiagJumpReqs(cellIDTopRight, diffSign, +1, -17)) {
+                if(isWallBetween(opponentCellId,cellID)) {
+                    return false;
+                }
                 return true;
             }
             if (hasDiagJumpReqs(cellIBottomLeft, diffSign, +17, -1)) {
+                if(isWallBetween(opponentCellId,cellID)) {
+                    return false;
+                }
                 return true;
             }
         }
@@ -277,5 +291,17 @@ public class GameLogic {
             }
         }
     }
+
+    private int findOpponentID() {
+        int opponentCellId = -1;
+        for (int i = 0; i < cells.size(); i++) {
+            if (!cells.get(i).getPlayer().equals(nextPlayer) && !cells.get(i).getPlayer().equals("player0")) {
+                opponentCellId = i +1; // +1 transforms index into ID
+                break;
+            }
+        }
+        return opponentCellId;
 }
+}
+
 
