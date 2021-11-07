@@ -36,7 +36,6 @@ public class GameController {
     @MessageMapping("/game/{gameId}")
         //@SendTo("/topic/greetings/{gameId}")
         public void greeting(@DestinationVariable String gameId, Request request) throws Exception {
-        System.out.println("Meghívtam az endpointot ");
         Optional<Game> optionalGame = gamerep.findById(Long.valueOf(gameId));
         if(optionalGame.isPresent()){
             Game game = optionalGame.get();
@@ -44,14 +43,17 @@ public class GameController {
             System.out.println("Game FOUND");
             String cellId = HtmlUtils.htmlEscape(request.getCellId());
             String player = HtmlUtils.htmlEscape(request.getPlayer());
-            System.out.println(player);
                 if (game.getNextPlayer().equals(player)) {
+                    System.out.println("Attol jott a lepes (" + player + "), aki koron van ");
                     gameLogic.tryMove(Integer.valueOf(cellId));
                     if(gameLogic.getMoveOutcomeType() == MoveOutcomeType.SUCCESS) {
+                        System.out.println("valid lepes");
                         gameLogic.whoHasWon();
+
                         String winner = gameLogic.getWinner();
                         if (winner != null) {
                             System.out.println("winner is : " + winner);
+
                             simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/" + "player1", Response.builder().winner("PLAYER " + winner + " HAS WON THE GAME").build());
                             simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/" + "player2", Response.builder().winner("PLAYER " + winner + " HAS WON THE GAME").build());
                         }
@@ -59,13 +61,15 @@ public class GameController {
                         game.setNextPlayer(player.equals("player1") ? "player2" : "player1");
                         game.setJsonFromCells(gameLogic.getCells());
                         gamerep.save(game);
+                        System.out.println("sending valid move responses to " + gameId);
                         simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",new Response(cellId,player));
                         simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(cellId,player));
                     }else{
+                        System.out.println("helytelen lepes game: " + gameId);
                         simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/"+ player,Response.builder().invalidMove(true).errorMsg(gameLogic.getMoveOutcomeType().getErrorMsg()).build());
                     }
-
                 } else {
+                    System.out.println("nem ez a player jon");
                     simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/"+ player,Response.builder().invalidMove(true).errorMsg("Not your turn!").build());
                     System.out.println(Response.builder().invalidMove(true).build());
                 }
