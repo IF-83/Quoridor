@@ -5,7 +5,8 @@ public enum MoveOutcomeType {
     INVALID_WALL_PLACEMENT ("You can not place a wall there!"),
     INVALID_STEP ("That's not a valid move!"),
     SUCCESS(""),
-    PLAYER_SURROUNDED("You can not capture players in between walls!");
+    PLAYER_SURROUNDED("You can not capture players in between walls!"),
+    STUB_RESPONSE("");
     String errorMsg;
 
     MoveOutcomeType(String errorMsg) {
