@@ -62,8 +62,8 @@ public class GameController {
                         game.setJsonFromCells(gameLogic.getCells());
                         gamerep.save(game);
                         System.out.println("sending valid move responses to " + gameId);
-                        simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",new Response(cellId,player));
-                        simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",new Response(cellId,player));
+                        simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player1",Response.builder().cellId(cellId).player(player).availableWalls(game.getAvailableWallsPlayer1()).build());
+                        simpleMessagingTemplate.convertAndSend("/runninggame/"+ gameId + "/" + "player2",Response.builder().cellId(cellId).player(player).availableWalls(game.getAvailableWallsPlayer2()).build());
                     }else{
                         System.out.println("helytelen lepes game: " + gameId);
                         simpleMessagingTemplate.convertAndSend("/runninggame/" + gameId + "/"+ player,Response.builder().invalidMove(true).errorMsg(gameLogic.getMoveOutcomeType().getErrorMsg()).build());

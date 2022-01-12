@@ -13,6 +13,7 @@ public class Response {
     private boolean invalidMove = false;
     private String errorMsg;
     private String winner;
+    private int availableWalls;
 
     public Response (Long gameId){
         this.gameId = gameId;
